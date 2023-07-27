@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Category extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $fillable = ['name', 'main_category_id'];
 
     // ---------------------------------------------------------------- Relationships
 

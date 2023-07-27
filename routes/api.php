@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\MainCategoryController;
-use App\Models\MainCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MainCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +26,9 @@ Route::post('main_category/restore/{main_category}', [MainCategoryController::cl
 Route::resource('main_category', MainCategoryController::class)->only('index','store','update','destroy');
 Route::get('main_category/trashed',[MainCategoryController::class, 'trashed'])->name('main_category.trashed');
 // ------------------- Main Category Routes
+
+// Category Routes -------------------
+Route::post('category/restore/{category}', [CategoryController::class, 'restoreData'])->withTrashed()->name('category.restore');
+Route::resource('category', CategoryController::class)->only('index','store','update','destroy');
+Route::get('category/trashed',[CategoryController::class, 'trashed'])->name('category.trashed');
+// ------------------- Category Routes
