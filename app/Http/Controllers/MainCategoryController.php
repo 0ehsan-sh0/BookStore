@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Nette\Utils\Strings;
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
 class MainCategoryController extends ApiController

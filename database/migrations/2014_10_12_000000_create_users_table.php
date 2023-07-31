@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('lastname')->nullable();
             $table->string('email')->unique();
-            $table->string('phone')->unique()->nullable();
-            $table->string('place_number')->unique()->nullable();
             $table->string('melicode')->unique()->nullable();
             $table->date('birthdate')->nullable();
             $table->enum('gender', ['male', 'female'])->nullable();
@@ -25,8 +23,8 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('Role');
-
+            $table->enum('role', ['admin', 'user'])->default('user');
+ 
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

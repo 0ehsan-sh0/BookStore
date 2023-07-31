@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->string('place_number')->unique();
             $table->string('post_code');
-            $table->string('state');
+            $table->string('state'); // استان
             $table->string('city');
             $table->string('address');
 
