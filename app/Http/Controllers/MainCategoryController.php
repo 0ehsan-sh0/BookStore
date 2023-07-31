@@ -47,9 +47,10 @@ class MainCategoryController extends ApiController
     public function update(Request $request, MainCategory $mainCategory)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required'
+            'name' => 'required|unique:main_categories,name,'. $mainCategory->id
         ], [
-            'name.required' => 'نام دسته بندی اصلی الزامی است'
+            'name.required' => 'نام دسته بندی اصلی الزامی است',
+            'name.unique' => 'نام دسته بندی اصلی نمیتواند تکراری باشد'
         ]);
 
         if ($validator->fails()) {
