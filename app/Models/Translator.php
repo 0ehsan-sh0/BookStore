@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Translator extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $fillable = ['name', 'description', 'photo'];
 
     // ---------------------------------------------------------------- Relationships
 

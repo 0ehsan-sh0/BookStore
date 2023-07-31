@@ -3,8 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WriterController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TranslatorController;
 use App\Http\Controllers\MainCategoryController;
 
 /*
@@ -51,3 +53,15 @@ Route::get('address/trashed',[AddressController::class, 'trashed'])->name('addre
 Route::post('address/restore/{address}', [AddressController::class, 'restoreData'])->withTrashed()->name('address.restore');
 Route::resource('address', AddressController::class)->only('index','store','update','destroy','show');
 // ------------------- Address Routes
+
+// Writer Routes -------------------
+Route::get('writer/trashed',[WriterController::class, 'trashed'])->name('writer.trashed');
+Route::post('writer/restore/{writer}', [WriterController::class, 'restoreData'])->withTrashed()->name('writer.restore');
+Route::resource('writer', WriterController::class)->only('index','store','update','destroy','show');
+// ------------------- Writer Routes
+
+// Translator Routes -------------------
+Route::get('translator/trashed',[TranslatorController::class, 'trashed'])->name('translator.trashed');
+Route::post('translator/restore/{translator}', [TranslatorController::class, 'restoreData'])->withTrashed()->name('translator.restore');
+Route::resource('translator', TranslatorController::class)->only('index','store','update','destroy','show');
+// ------------------- Translator Routes

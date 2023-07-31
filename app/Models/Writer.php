@@ -9,10 +9,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Writer extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $fillable = ['name', 'description', 'photo'];
 
     // ---------------------------------------------------------------- Relationships
 
-    public function books(){
+    public function books()
+    {
         return $this->hasMany(Book::class, 'writer_id');
     }
 
