@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WriterController;
 use App\Http\Controllers\AddressController;
@@ -65,3 +66,9 @@ Route::get('translator/trashed',[TranslatorController::class, 'trashed'])->name(
 Route::post('translator/restore/{translator}', [TranslatorController::class, 'restoreData'])->withTrashed()->name('translator.restore');
 Route::resource('translator', TranslatorController::class)->only('index','store','update','destroy','show');
 // ------------------- Translator Routes
+
+// Book Routes -------------------
+Route::get('book/trashed',[BookController::class, 'trashed'])->name('book.trashed');
+Route::post('book/restore/{book}', [BookController::class, 'restoreData'])->withTrashed()->name('book.restore');
+Route::resource('book', BookController::class)->only('index','store','update','destroy','show');
+// ------------------- Book Routes

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('english_name')->nullable();
             $table->longText('description');
-            $table->string('price');
+            $table->unsignedBigInteger('price');
             $table->string('photo');
             $table->unsignedSmallInteger('print_series');
             $table->string('isbn')->unique(); // شابک
