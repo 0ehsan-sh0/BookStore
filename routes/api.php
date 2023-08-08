@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WriterController;
 use App\Http\Controllers\AddressController;
@@ -72,3 +73,9 @@ Route::get('book/trashed',[BookController::class, 'trashed'])->name('book.trashe
 Route::post('book/restore/{book}', [BookController::class, 'restoreData'])->withTrashed()->name('book.restore');
 Route::resource('book', BookController::class)->only('index','store','update','destroy','show');
 // ------------------- Book Routes
+
+// Cart Routes -------------------
+Route::get('cart/trashed',[CartController::class, 'trashed'])->name('cart.trashed');
+Route::post('cart/restore/{cart}', [CartController::class, 'restoreData'])->withTrashed()->name('cart.restore');
+Route::resource('cart', CartController::class)->only('index','store','update','destroy','show');
+// ------------------- Cart Routes

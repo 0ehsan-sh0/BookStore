@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
-            $table->string('total_price');
-            $table->boolean('ischeckedout')->nullable();
+            $table->unsignedBigInteger('total_price');
+            $table->boolean('ischeckedout');
             $table->dateTime('checkedout_time')->nullable();
 
             $table->foreignId('user_id')->constrained('users')->OnDelete('cascade');

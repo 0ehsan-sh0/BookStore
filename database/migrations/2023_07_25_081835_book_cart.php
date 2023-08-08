@@ -13,12 +13,9 @@ return new class extends Migration
     {
         Schema::create('book_cart', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('book_id')->constrained('books')->OnDelete('cascade');
             $table->foreignId('cart_id')->constrained('carts')->OnDelete('cascade');
-            $table->string('count');
-
-            $table->softDeletes();
-            $table->timestamps();
+            $table->foreignId('book_id')->constrained('books')->OnDelete('cascade');
+            $table->unsignedSmallInteger('count')->default(0);
         });
     }
 
