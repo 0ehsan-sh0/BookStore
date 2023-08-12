@@ -61,10 +61,7 @@ class CartController extends ApiController
         if ($validator->fails()) {
             return $this->errorResponse('لطفا خطاهای زیر را بررسی کنید', $validator->errors());
         } else {
-            $code = random_int(100000000, 999999999);
-            while (Cart::where('code', $code)->count() > 0) {
-                $code = random_int(100000000, 999999999);
-            }
+            do $code = random_int(100000000, 999999999); while(Cart::where('code', $code)->count() > 0);
             $request->ischeckedout == true ? $checkedout_time = Carbon::now() : $checkedout_time = null;
             $cart = [
                 'code' => $code,
