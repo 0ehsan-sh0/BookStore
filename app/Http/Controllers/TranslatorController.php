@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTranslatorRequest;
+use App\Http\Requests\UpdateTranslatorRequest;
 use App\Models\Translator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -25,38 +27,23 @@ class TranslatorController extends ApiController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTranslatorRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:translators',
-            'photo' => 'mimes:jpg,jpeg,png|max:2048'
-        ], [
-            'name.required' => 'نام مترجم الزامی است',
-            'name.unique' => 'نام مترجم نمیتواند تکراری باشد',
-            'photo.mimes' => 'فرمت فایل باید از نوع png,jpeg,jpg باشد',
-            'photo.max' => 'حجم فایل نباید بیشتر از دو مگابایت باشد'
-        ]);
-
-        if ($validator->fails()) {
-            return $this->errorResponse('لطفا خطاهای زیر را بررسی کنید', $validator->errors());
+        if ($request->hasFile('photo')) {
+            $photo_path = $request->file('photo')->store('translators', 'public');
+            $translator = [
+                'name' => $request->name,
+                'description' => $request->description,
+                'photo' => $photo_path
+            ];
         } else {
-            if ($request->hasFile('photo')) {
-                $photo_path = $request->file('photo')->store('translators', 'public');
-                $translator = [
-                    'name' => $request->name,
-                    'description' => $request->description,
-                    'photo' => $photo_path
-                ];
-            }
-            else {
-                $translator = [
-                    'name' => $request->name,
-                    'description' => $request->description
-                ];
-            }
-            Translator::create($translator);
-            return $this->successResponse('مترجم با موفقیت افزوده شد', '1');
+            $translator = [
+                'name' => $request->name,
+                'description' => $request->description
+            ];
         }
+        Translator::create($translator);
+        return $this->successResponse('مترجم با موفقیت افزوده شد', '1');
     }
 
     /**
@@ -70,41 +57,26 @@ class TranslatorController extends ApiController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Translator $translator)
+    public function update(UpdateTranslatorRequest $request, Translator $translator)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:translators,name,' . $translator->id,
-            'photo' => 'mimes:jpg,jpeg,png|max:2048'
-        ], [
-            'name.required' => 'نام مترجم الزامی است',
-            'name.unique' => 'نام مترجم نمیتواند تکراری باشد',
-            'photo.mimes' => 'فرمت فایل باید از نوع png,jpeg,jpg باشد',
-            'photo.max' => 'حجم فایل نباید بیشتر از دو مگابایت باشد'
-        ]);
-
-        if ($validator->fails()) {
-            return $this->errorResponse('لطفا خطاهای زیر را بررسی کنید', $validator->errors());
+        if ($request->hasFile('photo')) {
+            if ($translator->photo) {
+                Storage::disk('public')->delete($translator->photo);
+            }
+            $photo_path = $request->file('photo')->store('translators', 'public');
+            $translator_update = [
+                'name' => $request->name,
+                'description' => $request->description,
+                'photo' => $photo_path
+            ];
         } else {
-            if ($request->hasFile('photo')) {
-                if ($translator->photo) {
-                    Storage::disk('public')->delete($translator->photo);
-                }
-                $photo_path = $request->file('photo')->store('translators', 'public');
-                $translator_update = [
-                    'name' => $request->name,
-                    'description' => $request->description,
-                    'photo' => $photo_path
-                ];
-            }
-            else {
-                $translator_update = [
-                    'name' => $request->name,
-                    'description' => $request->description
-                ];
-            }
-            $translator->update($translator_update);
-            return $this->successResponse('اطلاعات مترجم با موفقیت بروزرسانی شد', '1');
+            $translator_update = [
+                'name' => $request->name,
+                'description' => $request->description
+            ];
         }
+        $translator->update($translator_update);
+        return $this->successResponse('اطلاعات مترجم با موفقیت بروزرسانی شد', '1');
     }
 
     /**

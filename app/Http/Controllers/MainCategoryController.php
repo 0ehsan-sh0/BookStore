@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMainCategoryRequest;
+use App\Http\Requests\UpdateMainCategoryRequest;
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -24,43 +26,21 @@ class MainCategoryController extends ApiController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreMainCategoryRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:main_categories'
-        ], [
-            'name.required' => 'نام دسته بندی اصلی الزامی است',
-            'name.unique' => 'نام دسته بندی اصلی نمیتواند تکراری باشد'
-        ]);
-
-        if ($validator->fails()) {
-            return $this->errorResponse('لطفا خطاهای زیر را بررسی کنید', $validator->errors());
-        } else {
-            MainCategory::create($request->all());
-            return $this->successResponse('دسته بندی اصلی با موفقیت افزوده شد', '1');
-        }
+        MainCategory::create($request->all());
+        return $this->successResponse('دسته بندی اصلی با موفقیت افزوده شد', '1');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MainCategory $mainCategory)
+    public function update(UpdateMainCategoryRequest $request, MainCategory $mainCategory)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:main_categories,name,'. $mainCategory->id
-        ], [
-            'name.required' => 'نام دسته بندی اصلی الزامی است',
-            'name.unique' => 'نام دسته بندی اصلی نمیتواند تکراری باشد'
-        ]);
-
-        if ($validator->fails()) {
-            return $this->errorResponse('لطفا خطاهای زیر را بررسی کنید', $validator->errors());
-        } else {
-            $mainCategory->update($request->all());
-            return $this->successResponse('دسته بندی اصلی با موفقیت بروزرسانی شد', '1');
-        }
+        $mainCategory->update($request->all());
+        return $this->successResponse('دسته بندی اصلی با موفقیت بروزرسانی شد', '1');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      */
