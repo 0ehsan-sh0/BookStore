@@ -26,7 +26,8 @@ class StoreMainCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:main_categories'
+            'url' => 'required|unique:main_categories|regex:/^[a-zA-Z0-9-]+$/',
+            'name' => 'required'
         ];
     }
 
@@ -50,8 +51,10 @@ class StoreMainCategoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'نام دسته بندی اصلی الزامی است',
-            'name.unique' => 'نام دسته بندی اصلی نمیتواند تکراری باشد'
+            'url.required' => 'مسیر دسته بندی اصلی الزامی است',
+            'url.regex' => 'لطفا مسیر معتبر وارد کنید',
+            'url.unique' => 'مسیر دسته بندی اصلی نمیتواند تکراری باشد',
+            'name.required' => 'نام دسته بندی اصلی الزامی است'
         ];
     }
 }

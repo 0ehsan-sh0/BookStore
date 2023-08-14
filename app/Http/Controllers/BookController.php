@@ -14,7 +14,7 @@ class BookController extends ApiController
      */
     public function index()
     {
-        return $this->successResponse('عملیات با موفقیت انجام شد', Book::with(['categories', 'translators:id,name'])->latest()->paginate(20));
+        return $this->successResponse('عملیات با موفقیت انجام شد', Book::with(['categories', 'translators:id,name', 'writer:id,name'])->latest()->paginate(20));
     }
 
     public function trashed()
@@ -57,7 +57,7 @@ class BookController extends ApiController
      */
     public function show(Book $book)
     {
-        return $this->successResponse('عملیات با موفقیت انجام شد', Book::with(['categories', 'translators:id,name'])
+        return $this->successResponse('عملیات با موفقیت انجام شد', Book::with(['categories', 'translators:id,name', 'writer:id,name'])
             ->where('id', '=', $book->id)
             ->first());
     }

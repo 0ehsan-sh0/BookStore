@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Models\MainCategory;
 
 class CategoryController extends ApiController
 {
@@ -21,6 +20,23 @@ class CategoryController extends ApiController
     public function trashed()
     {
         return $this->successResponse('عملیات با موفقیت انجام شد', Category::onlyTrashed()->get());
+    }
+
+    // Get all books of a category
+    public function categoryBooks($main_category, $category)
+    {
+        $mainCategory = MainCategory::where('url', $main_category)->first();
+        if ($mainCategory) { //check if the main category exists
+            foreach ($mainCategory->categories as $index => $Mcategory) {
+                if ($Mcategory->url === $category) { // check if the category exists
+                    $finalCategory = Category::where('url', $category)
+                        ->with('books.writer', 'books.translators') // get the information of category books with books' translators and writers
+                        ->first();
+                    return $this->successResponse('عملیات با موفقیت انجام شد', $finalCategory->books);
+                }
+            }
+            return $this->errorResponse('لطفا خطاهای زیر را بررسی کنید', 'مسیر مورد نظر معتبر نیست');
+        } else return $this->errorResponse('لطفا خطاهای زیر را بررسی کنید', 'مسیر مورد نظر معتبر نیست');
     }
     /**
      * Store a newly created resource in storage.

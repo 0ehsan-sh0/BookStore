@@ -15,12 +15,12 @@ class MainCategoryController extends ApiController
      */
     public function index()
     {
-        return $this->successResponse('عملیات با موفقیت انجام شد', MainCategory::all());
+        return $this->successResponse('عملیات با موفقیت انجام شد', MainCategory::with('categories')->get());
     }
 
     public function trashed()
     {
-        return $this->successResponse('عملیات با موفقیت انجام شد', MainCategory::onlyTrashed()->get());
+        return $this->successResponse('عملیات با موفقیت انجام شد', MainCategory::with('categories')->onlyTrashed()->get());
     }
 
     /**

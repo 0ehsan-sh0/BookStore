@@ -26,7 +26,8 @@ class UpdateMainCategoryRequest extends FormRequest
     {
         $mainCategory = $this->route('main_category');
         return [
-            'name' => 'required|unique:main_categories,name,'. $mainCategory->id
+            'url' => 'required|regex:/^[a-zA-Z0-9-]+$/|unique:main_categories,url,'. $mainCategory->id,
+            'name' => 'required'
         ];
     }
 
@@ -50,8 +51,10 @@ class UpdateMainCategoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'نام دسته بندی اصلی الزامی است',
-            'name.unique' => 'نام دسته بندی اصلی نمیتواند تکراری باشد'
+            'url.required' => 'مسیر دسته بندی اصلی الزامی است',
+            'url.regex' => 'لطفا مسیر معتبر وارد کنید',
+            'url.unique' => 'مسیر دسته بندی اصلی نمیتواند تکراری باشد',
+            'name.required' => 'نام دسته بندی اصلی الزامی است'
         ];
     }
 }

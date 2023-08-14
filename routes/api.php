@@ -72,6 +72,7 @@ Route::resource('translator', TranslatorController::class)->only('index','store'
 Route::get('book/trashed',[BookController::class, 'trashed'])->name('book.trashed');
 Route::post('book/restore/{book}', [BookController::class, 'restoreData'])->withTrashed()->name('book.restore');
 Route::resource('book', BookController::class)->only('index','store','update','destroy','show');
+Route::get('book/{main_category}/{category}', [CategoryController::class, 'categoryBooks'])->name('book.getCategoryBook');
 // ------------------- Book Routes
 
 // Cart Routes -------------------
