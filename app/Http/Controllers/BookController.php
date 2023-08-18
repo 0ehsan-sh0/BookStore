@@ -57,9 +57,12 @@ class BookController extends ApiController
      */
     public function show(Book $book)
     {
-        return $this->successResponse('عملیات با موفقیت انجام شد', Book::with(['categories', 'translators:id,name', 'writer:id,name'])
-            ->where('id', '=', $book->id)
-            ->first());
+        return $this->successResponse(
+            'عملیات با موفقیت انجام شد',
+            Book::with(['categories', 'translators:id,name', 'writer:id,name', 'comments'])
+                ->where('id', '=', $book->id)
+                ->first()
+        );
     }
 
     /**

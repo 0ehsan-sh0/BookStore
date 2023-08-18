@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Book;
 use App\Models\Category;
 use App\Models\MainCategory;
 
@@ -29,10 +30,13 @@ class CategoryController extends ApiController
         if ($mainCategory) { //check if the main category exists
             foreach ($mainCategory->categories as $index => $Mcategory) {
                 if ($Mcategory->url === $category) { // check if the category exists
-                    $finalCategory = Category::where('url', $category)
-                        ->with('books.writer', 'books.translators') // get the information of category books with books' translators and writers
-                        ->first();
-                    return $this->successResponse('عملیات با موفقیت انجام شد', $finalCategory->books);
+                    $books = Book::with(['categories', 'translators:id,name', 'writer:id,name'])
+                        ->whereHas('categories', function ($query) use ($category) {
+                            $query->where('url', $category);
+                        })
+                        ->latest()
+                        ->paginate(20);
+                    return $this->successResponse('عملیات با موفقیت انجام شد', $books);
                 }
             }
             return $this->errorResponse('لطفا خطاهای زیر را بررسی کنید', 'مسیر مورد نظر معتبر نیست');
