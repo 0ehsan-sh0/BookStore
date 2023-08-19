@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Comment extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $fillable = ['comment', 'user_id', 'book_id'];
 
     // ---------------------------------------------------------------- Relationships
 
