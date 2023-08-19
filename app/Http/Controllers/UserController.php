@@ -2,45 +2,64 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Http\Response;
 
 class UserController extends ApiController
 {
     // ---------------------------------------------------------------- Register , Login And Logout
     public function register(StoreUserRequest $request)
     {
-        $user = User::create([
-            'name' => $request->name,
-            'lastname' => $request->lastname,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-        Auth::login($user);
-        return response()->json(['success' => true]);
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'lastname' => $request->lastname,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+            return $this->successResponse(
+                'ثبت نام با موفقیت انجام شد',
+                [
+                    'token' => $user->createToken('Api token ' . $user->name . ' ' . $user->lastname)
+                        ->plainTextToken,
+                    'user' => $user
+                ]
+            );
+        } catch (\Throwable $th) {
+            return $this->errorResponse('خطا از سمت سرور', '', 500);
+        }
     }
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
+        try {
+            if (!Auth::attempt($request->only('email', 'password'))) {
+                return $this->errorResponse('ایمیل یا رمز عبور اشتباه است', '', 401);
+            }
             // Authentication passed...
-            $user = User::where('email', $request->email)->first();
-            return $this->successResponse('ورود با موفقیت انجام شد', $user);
-        } else {
-            return response()->json(['success' => false]);
+            $user = User::with('comments', 'carts', 'addresses')->where('email', $request->email)->first();
+            return $this->successResponse(
+                'ورود با موفقیت انجام شد',
+                [
+                    'token' => $user->createToken('Api token')
+                        ->plainTextToken,
+                    'user' => $user
+                ]
+            );
+        } catch (\Throwable $th) {
+            return $this->errorResponse('خطا از سمت سرور', '', 500);
         }
     }
 
     public function logout(Request $request)
     {
-        Auth::logout();
-        return response()->json(['success' => true]);
+        Auth::user()->currentAccessToken()->delete();
+        return $this->successResponse('شما از حساب کاربری خود خارج شدید', '', Response::HTTP_FOUND);
     }
     // Register , Login And Logout ---------------------------------------------------------------- 
 
@@ -49,20 +68,26 @@ class UserController extends ApiController
      */
     public function index()
     {
-        return $this->successResponse('عملیات با موفقیت انجام شد', User::all());
+        return $this->successResponse('عملیات با موفقیت انجام شد', User::all()->latest()->paginate(20));
     }
 
     public function trashed()
     {
-        return $this->successResponse('عملیات با موفقیت انجام شد', User::onlyTrashed()->get());
+        return $this->successResponse('عملیات با موفقیت انجام شد', User::onlyTrashed()->latest()->paginate(20));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show($user)
     {
-        return $this->successResponse('عملیات با موفقیت انجام شد', $user);
+        $theUser = User::with('comments', 'carts', 'addresses')
+            ->where('id', $user)
+            ->first();
+        if ($theUser) {
+            return $this->successResponse('عملیات با موفقیت انجام شد', $theUser);
+        }
+        return $this->errorResponse('کاربر مورد نظر یافت نشد', '');
     }
 
     /**
