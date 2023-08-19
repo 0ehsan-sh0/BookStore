@@ -15,12 +15,12 @@ class AddressController extends ApiController
      */
     public function index()
     {
-        return $this->successResponse('عملیات با موفقیت انجام شد', Address::all());
+        return $this->successResponse('عملیات با موفقیت انجام شد', Address::all()->latest()->paginate(20));
     }
 
     public function trashed()
     {
-        return $this->successResponse('عملیات با موفقیت انجام شد', Address::onlyTrashed()->get());
+        return $this->successResponse('عملیات با موفقیت انجام شد', Address::onlyTrashed()->latest()->paginate(20));
     }
     /**
      * Store a newly created resource in storage.

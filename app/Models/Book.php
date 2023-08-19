@@ -36,7 +36,7 @@ class Book extends Model
 
     public function carts(): BelongsToMany
     {
-        return $this->belongsToMany(Cart::class, 'book_cart');
+        return $this->belongsToMany(Cart::class, 'book_cart')->withPivot('count');
     }
 
     public function comments()

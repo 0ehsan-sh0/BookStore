@@ -26,7 +26,7 @@ class CartController extends ApiController
      */
     public function index()
     {
-        return $this->successResponse('عملیات با موفقیت انجام شد', Cart::with(['user:id,name,lastname,email', 'books:id,name,photo,isbn'])
+        return $this->successResponse('عملیات با موفقیت انجام شد', Cart::with(['user:id,name,lastname,email', 'books:id,name,photo,price,isbn'])
             ->latest()
             ->paginate(20));
     }
@@ -73,7 +73,7 @@ class CartController extends ApiController
      */
     public function show(Cart $cart)
     {
-        return $this->successResponse('عملیات با موفقیت انجام شد', Cart::with(['user:id,name,lastname,email', 'books:id,name,photo,isbn'])
+        return $this->successResponse('عملیات با موفقیت انجام شد', Cart::with(['user:id,name,lastname,email', 'books:id,name,photo,price,isbn'])
             ->where('id', '=', $cart->id)
             ->first());
     }
