@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Models\Translator;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UpdateTranslatorRequest extends FormRequest
 {
@@ -24,7 +25,8 @@ class UpdateTranslatorRequest extends FormRequest
      */
     public function rules(): array
     {
-        $translator = $this->route('translator');
+        $translator = Translator::find($this->route('translator'));
+        if (!$translator) return ['translator' => 'required|exists:translators,id'];
         return [
             'name' => 'required|unique:translators,name,' . $translator->id,
             'photo' => 'mimes:jpg,jpeg,png|max:2048'
@@ -54,7 +56,9 @@ class UpdateTranslatorRequest extends FormRequest
             'name.required' => 'نام مترجم الزامی است',
             'name.unique' => 'نام مترجم نمیتواند تکراری باشد',
             'photo.mimes' => 'فرمت فایل باید از نوع png,jpeg,jpg باشد',
-            'photo.max' => 'حجم فایل نباید بیشتر از دو مگابایت باشد'
+            'photo.max' => 'حجم فایل نباید بیشتر از دو مگابایت باشد',
+            'translator.exists' => 'مسیر مورد نظر معتبر نیست',
+            'translator.required' => 'مسیر مورد نظر معتبر نیست'
         ];
     }
 }

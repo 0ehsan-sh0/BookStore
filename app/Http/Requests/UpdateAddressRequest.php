@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Models\Address;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UpdateAddressRequest extends FormRequest
 {
@@ -24,7 +25,8 @@ class UpdateAddressRequest extends FormRequest
      */
     public function rules(): array
     {
-        $address = $this->route('address');
+        $address = Address::find($this->route('address'));
+        if (!$address) return ['address' => 'required|exists:addresses,id'];
         return [
             'name' => 'required',
             'lastname' => 'required',
@@ -70,7 +72,8 @@ class UpdateAddressRequest extends FormRequest
             'post_code.required' => 'کد پستی الزامی است',
             'post_code.unique' => 'کد پستی تکراری است',
             'post_code.numeric' => 'کد پستی باید عددی باشد',
-            'address.required' => 'آدرس الزامی است'
+            'address.required' => 'آدرس الزامی است',
+            'address.exists' => 'مسیر مورد نظر معتبر نیست'
         ];
     }
 }

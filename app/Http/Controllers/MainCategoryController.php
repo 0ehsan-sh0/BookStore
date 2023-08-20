@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMainCategoryRequest;
 use App\Http\Requests\UpdateMainCategoryRequest;
 use App\Models\MainCategory;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class MainCategoryController extends ApiController
 {
+    public function find($id)
+    {
+        $object = MainCategory::find($id);
+        if ($object) return $object;
+        else false;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -35,8 +39,9 @@ class MainCategoryController extends ApiController
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMainCategoryRequest $request, MainCategory $mainCategory)
+    public function update(UpdateMainCategoryRequest $request, $mainCategory)
     {
+        $mainCategory = $this->find($mainCategory);
         $mainCategory->update($request->all());
         return $this->successResponse('دسته بندی اصلی با موفقیت بروزرسانی شد', '1');
     }
@@ -44,15 +49,20 @@ class MainCategoryController extends ApiController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MainCategory $mainCategory)
+    public function destroy($mainCategory)
     {
+        $mainCategory = $this->find($mainCategory);
+        if (!$mainCategory) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
         $mainCategory->delete();
         return $this->successResponse('دسته بندی اصلی با موفقیت حذف شد', '1');
     }
 
-    public function restoreData(MainCategory $mainCategory)
+    public function restoreData($mainCategory)
     {
-        $mainCategory->restore();
-        return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
+        $mainCategory = MainCategory::onlyTrashed()->find($mainCategory);
+        if ($mainCategory) {
+            $mainCategory->restore();
+            return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
+        } else return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
     }
 }

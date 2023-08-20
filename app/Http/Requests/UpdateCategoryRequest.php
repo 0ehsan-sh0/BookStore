@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Models\Category;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UpdateCategoryRequest extends FormRequest
 {
@@ -24,9 +25,10 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $category = $this->route('category');
+        $category = Category::find($this->route('category'));
+        if (!$category) return ['category' => 'required|exists:categories,id'];
         return [
-            'url' => 'required|regex:/^[a-zA-Z0-9-]+$/|unique:categories,url,' . $category,
+            'url' => 'required|regex:/^[a-zA-Z0-9-]+$/|unique:categories,url,' . $category->id,
             'name' => 'required',
             'main_category_id' => 'required|exists:main_categories,id' // Add validation rule for main_category_id
         ];
@@ -56,7 +58,9 @@ class UpdateCategoryRequest extends FormRequest
             'name.required' => 'نام دسته بندی الزامی است',
             'url.regex' => 'لطفا مسیر معتبر وارد کنید',
             'main_category_id.required' => 'دسته بندی اصلی الزامی است', // Add custom error message for main_category_id
-            'main_category_id.exists' => 'دسته بندی اصلی معتبر نیست' // Add custom error message for main_category_id
+            'main_category_id.exists' => 'دسته بندی اصلی معتبر نیست', // Add custom error message for main_category_id
+            'category.exists' => 'مسیر مورد نظر معتبر نیست',
+            'category.required' => 'مسیر مورد نظر معتبر نیست'
         ];
     }
 }

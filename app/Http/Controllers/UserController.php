@@ -12,6 +12,13 @@ use Illuminate\Http\Response;
 
 class UserController extends ApiController
 {
+    // Find a specific object with id
+    public function find($id)
+    {
+        $object = User::find($id);
+        if ($object) return $object;
+        else false;
+    }
     // ---------------------------------------------------------------- Register , Login And Logout
     public function register(StoreUserRequest $request)
     {
@@ -25,7 +32,7 @@ class UserController extends ApiController
             return $this->successResponse(
                 'ثبت نام با موفقیت انجام شد',
                 [
-                    'token' => $user->createToken('Api token ' . $user->name . ' ' . $user->lastname)
+                    'token' => $user->createToken('Api token')
                         ->plainTextToken,
                     'user' => $user
                 ]
@@ -68,7 +75,7 @@ class UserController extends ApiController
      */
     public function index()
     {
-        return $this->successResponse('عملیات با موفقیت انجام شد', User::all()->latest()->paginate(20));
+        return $this->successResponse('عملیات با موفقیت انجام شد', User::latest()->paginate(20));
     }
 
     public function trashed()
@@ -81,20 +88,18 @@ class UserController extends ApiController
      */
     public function show($user)
     {
-        $theUser = User::with('comments', 'carts', 'addresses')
-            ->where('id', $user)
-            ->first();
-        if ($theUser) {
-            return $this->successResponse('عملیات با موفقیت انجام شد', $theUser);
-        }
-        return $this->errorResponse('کاربر مورد نظر یافت نشد', '');
+        $user = User::with('comments', 'carts', 'addresses')
+            ->find($user);
+        if (!$user) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
+        return $this->successResponse('عملیات با موفقیت انجام شد', $user);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, $user)
     {
+        $user = $this->find($user);
         $user->name = $request->name;
         $user->lastname = $request->lastname;
         $user->email = $request->email;
@@ -116,15 +121,20 @@ class UserController extends ApiController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy($user)
     {
+        $user = $this->find($user);
+        if (!$user) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
         $user->delete();
         return $this->successResponse('کاربر با موفقیت حذف شد', '1');
     }
 
-    public function restoreData(User $user)
+    public function restoreData($user)
     {
-        $user->restore();
-        return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
+        $user = User::onlyTrashed()->find($user);
+        if ($user) {
+            $user->restore();
+            return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
+        } else return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
     }
 }

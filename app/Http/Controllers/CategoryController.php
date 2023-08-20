@@ -10,6 +10,13 @@ use App\Models\MainCategory;
 
 class CategoryController extends ApiController
 {
+    // Find a specific object with id
+    public function find($id)
+    {
+        $object = Category::find($id);
+        if ($object) return $object;
+        else false;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -31,7 +38,7 @@ class CategoryController extends ApiController
             foreach ($mainCategory->categories as $index => $Mcategory) {
                 if ($Mcategory->url === $category) { // check if the category exists
                     $books = Book::with(['categories', 'translators:id,name', 'writer:id,name'])
-                        ->whereHas('categories', function ($query) use ($category) {
+                        ->whereHas('categories', function ($query) use ($category) { // separate each book with the specified category
                             $query->where('url', $category);
                         })
                         ->latest()
@@ -56,8 +63,9 @@ class CategoryController extends ApiController
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(UpdateCategoryRequest $request, $category)
     {
+        $category = $this->find($category);
         $category->update($request->all());
         $category->main_category()->associate($request->main_category_id); // Associate main category with category
         $category->save();
@@ -67,15 +75,20 @@ class CategoryController extends ApiController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy($category)
     {
+        $category = $this->find($category);
+        if (!$category) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
         $category->delete();
         return $this->successResponse('دسته بندی با موفقیت حذف شد', '1');
     }
 
-    public function restoreData(Category $category)
+    public function restoreData($category)
     {
-        $category->restore();
-        return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
+        $category = Category::onlyTrashed()->find($category);
+        if ($category) {
+            $category->restore();
+            return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
+        } else return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
     }
 }

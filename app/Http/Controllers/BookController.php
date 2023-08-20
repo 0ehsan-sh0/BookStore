@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Storage;
 
 class BookController extends ApiController
 {
+    // Find a specific object with id
+    public function find($id)
+    {
+        $object = Book::find($id);
+        if ($object) return $object;
+        else false;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -55,21 +62,20 @@ class BookController extends ApiController
     /**
      * Display the specified resource.
      */
-    public function show(Book $book)
+    public function show($book)
     {
-        return $this->successResponse(
-            'عملیات با موفقیت انجام شد',
-            Book::with(['categories', 'translators:id,name', 'writer:id,name', 'comments'])
-                ->where('id', '=', $book->id)
-                ->first()
-        );
+        $book = Book::with(['categories', 'translators:id,name', 'writer:id,name', 'comments'])
+            ->find($book);
+        if (!$book) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
+        return $this->successResponse('عملیات با موفقیت انجام شد', $book);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBookRequest $request, Book $book)
+    public function update(UpdateBookRequest $request, $book)
     {
+        $book = $this->find($book);
         if ($request->hasFile('photo')) {
             if ($book->photo) {
                 Storage::disk('public')->delete($book->photo);
@@ -115,15 +121,20 @@ class BookController extends ApiController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Book $book)
+    public function destroy($book)
     {
+        $book = $this->find($book);
+        if (!$book) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
         $book->delete();
         return $this->successResponse('کتاب با موفقیت حذف شد', '1');
     }
 
-    public function restoreData(Book $book)
+    public function restoreData($book)
     {
-        $book->restore();
-        return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
+        $book = Book::onlyTrashed()->find($book);
+        if ($book) {
+            $book->restore();
+            return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
+        } else return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
     }
 }

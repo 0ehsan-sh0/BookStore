@@ -10,12 +10,19 @@ use App\Http\Requests\UpdateCommentRequest;
 
 class CommentController extends ApiController
 {
+    // Find a specific object with id
+    public function find($id)
+    {
+        $object = Comment::find($id);
+        if ($object) return $object;
+        else false;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return $this->successResponse('عملیات با موفقیت انجام شد', Comment::all()->paginate(20));
+        return $this->successResponse('عملیات با موفقیت انجام شد', Comment::latest()->paginate(20));
     }
 
     public function trashed()
@@ -35,8 +42,10 @@ class CommentController extends ApiController
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCommentRequest $request, Comment $comment)
+    public function update(UpdateCommentRequest $request, $comment)
     {
+        $comment = $this->find($comment);
+        if (!$comment) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
         $comment->update($request->all());
         return $this->successResponse('کامنت با موفقیت بروزرسانی شد', '1');
     }
@@ -44,8 +53,10 @@ class CommentController extends ApiController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comment $comment)
+    public function destroy($comment)
     {
+        $comment = $this->find($comment);
+        if (!$comment) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
         if (Auth::user()->id === $comment->user_id || Auth::user()->role === 'admin') {
             $comment->delete();
             return $this->successResponse('کامنت با موفقیت حذف شد', '1');
@@ -53,9 +64,12 @@ class CommentController extends ApiController
         return $this->errorResponse('شما نمیتوانید نظرات دیگران را حذف کنید', '', 401);
     }
 
-    public function restoreData(Comment $comment)
+    public function restoreData($comment)
     {
-        $comment->restore();
-        return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
+        $comment = Comment::onlyTrashed()->find($comment);
+        if ($comment) {
+            $comment->restore();
+            return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
+        } else return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
     }
 }

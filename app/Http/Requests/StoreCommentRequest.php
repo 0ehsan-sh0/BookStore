@@ -52,7 +52,7 @@ class StoreCommentRequest extends FormRequest
     {
         return [
             'comment.required' => 'لطفا نظرت رو بنویس',
-            'book_id.required' => 'کتابی که برای آن نظر میخواهید بدهید را انتخاب کنید',
+            'book_id.required' => 'کتابی که میخوای براش نظر بدی رو انتخاب کن',
             'book_id.exists' => 'کتاب مورد نظر یافت نشد'
         ];
     }

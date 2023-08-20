@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -24,7 +25,8 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules(): array
     {
-        $user = $this->route('user');
+        $user = User::find($this->route('user'));
+        if (!$user) return ['user' => 'required|exists:main_categories,id'];
         return [
             'name' => 'required',
             'lastname' => 'required',
@@ -75,7 +77,9 @@ class UpdateUserRequest extends FormRequest
             'state.required' => 'لطفا استان را وارد کنید',
             'city.required' => 'لطفا شهر را وارد کنید',
             'role.required' => 'لطفا سطح دسترسی را وارد کنید',
-            'role.in' => 'لطفا سطح دسترسی را درست وارد کنید'
+            'role.in' => 'لطفا سطح دسترسی را درست وارد کنید',
+            'user.exists' => 'مسیر مورد نظر معتبر نیست',
+            'user.required' => 'مسیر مورد نظر معتبر نیست'
         ];
     }
 }

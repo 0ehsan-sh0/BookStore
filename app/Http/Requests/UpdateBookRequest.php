@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Book;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Foundation\Http\FormRequest;
@@ -25,7 +26,8 @@ class UpdateBookRequest extends FormRequest
      */
     public function rules(): array
     {
-        $bookId = $this->route('book')->id; // Get the book ID from the route parameter
+        $book = Book::find($this->route('book'));
+        if (!$book) return ['book' => 'required|exists:books,id'];
         return [
             'name' => 'required',
             'english_name' => 'nullable|regex:/^[a-zA-Z0-9 ]+$/',
@@ -35,7 +37,7 @@ class UpdateBookRequest extends FormRequest
             'print_series' => 'required|numeric|min:0|max:65533',
             'isbn' => [
                 'required',
-                Rule::unique('books', 'isbn')->ignore($bookId),
+                Rule::unique('books', 'isbn')->ignore($book->id),
             ],
             'format' => 'required',
             'pages' => 'required|numeric|min:1',
@@ -98,7 +100,8 @@ class UpdateBookRequest extends FormRequest
             'categories.required' => 'این فیلد الزامی است',
             'categories.*.exists' => 'دسته بندی مورد نظر یافت نشد',
             'translators.required' => 'این فیلد الزامی است',
-            'translators.*.exists' => 'مترجم مورد نظر یافت نشد'
+            'translators.*.exists' => 'مترجم مورد نظر یافت نشد',
+            'book.exists' => 'مسیر مورد نظر معتبر نیست'
         ];
     }
 }

@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Validator;
 
 class CartController extends ApiController
 {
+    // Find a specific object with id
+    public function find($id)
+    {
+        $object = Cart::find($id);
+        if ($object) return $object;
+        else false;
+    }
+
     // Function for calculating the total price
     public function countTotalPrice($cart)
     {
@@ -71,18 +79,21 @@ class CartController extends ApiController
     /**
      * Display the specified resource.
      */
-    public function show(Cart $cart)
+    public function show($cart)
     {
-        return $this->successResponse('عملیات با موفقیت انجام شد', Cart::with(['user:id,name,lastname,email', 'books:id,name,photo,price,isbn'])
-            ->where('id', '=', $cart->id)
-            ->first());
+        $cart = Cart::with(['user:id,name,lastname,email', 'books:id,name,photo,price,isbn'])
+            ->find($cart);
+        if (!$cart) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
+        return $this->successResponse('عملیات با موفقیت انجام شد', $cart);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCartRequest $request, Cart $cart)
+    public function update(UpdateCartRequest $request, $cart)
     {
+        $cart = $this->find($cart);
+        if (!$cart) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
         if ($cart->ischeckedout) {
             return $this->errorResponse('لطفا خطاهای زیر را بررسی کنید', 'نمیتوانید اطلاعات سبد خریدی را که پرداخت آن نهایی شده است تغییر دهید');
         }
@@ -114,15 +125,20 @@ class CartController extends ApiController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cart $cart)
+    public function destroy($cart)
     {
+        $cart = $this->find($cart);
+        if (!$cart) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
         $cart->delete();
         return $this->successResponse('سبد خرید با موفقیت حذف شد', '1');
     }
 
-    public function restoreData(Cart $cart)
+    public function restoreData($cart)
     {
-        $cart->restore();
-        return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
+        $cart = Cart::onlyTrashed()->find($cart);
+        if ($cart) {
+            $cart->restore();
+            return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
+        } else return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
     }
 }

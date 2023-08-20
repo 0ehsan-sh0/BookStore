@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Validator;
 
 class WriterController extends ApiController
 {
+    // Find a specific object with id
+    public function find($id)
+    {
+        $object = Writer::find($id);
+        if ($object) return $object;
+        else false;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -49,15 +56,18 @@ class WriterController extends ApiController
     /**
      * Display the specified resource.
      */
-    public function show(Writer $writer)
+    public function show($writer)
     {
+        $writer = $this->find($writer);
+        if (!$writer) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
         return $this->successResponse('عملیات با موفقیت انجام شد', $writer);
     }
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateWriterRequest $request, Writer $writer)
+    public function update(UpdateWriterRequest $request, $writer)
     {
+        $writer = $this->find($writer);
         if ($request->hasFile('photo')) {
             if ($writer->photo) {
                 Storage::disk('public')->delete($writer->photo);
@@ -81,15 +91,20 @@ class WriterController extends ApiController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Writer $writer)
+    public function destroy($writer)
     {
+        $writer = $this->find($writer);
+        if (!$writer) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
         $writer->delete();
         return $this->successResponse('نویسنده با موفقیت حذف شد', '1');
     }
 
-    public function restoreData(Writer $writer)
+    public function restoreData($writer)
     {
-        $writer->restore();
-        return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
+        $writer = Writer::onlyTrashed()->find($writer);
+        if ($writer) {
+            $writer->restore();
+            return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
+        } else return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
     }
 }

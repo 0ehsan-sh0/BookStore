@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Validator;
 
 class TranslatorController extends ApiController
 {
+    // Find a specific object with id
+    public function find($id)
+    {
+        $object = Translator::find($id);
+        if ($object) return $object;
+        else false;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -49,16 +56,19 @@ class TranslatorController extends ApiController
     /**
      * Display the specified resource.
      */
-    public function show(Translator $translator)
+    public function show($translator)
     {
+        $translator = $this->find($translator);
+        if (!$translator) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
         return $this->successResponse('عملیات با موفقیت انجام شد', $translator);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTranslatorRequest $request, Translator $translator)
+    public function update(UpdateTranslatorRequest $request, $translator)
     {
+        $translator = $this->find($translator);
         if ($request->hasFile('photo')) {
             if ($translator->photo) {
                 Storage::disk('public')->delete($translator->photo);
@@ -82,15 +92,20 @@ class TranslatorController extends ApiController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Translator $translator)
+    public function destroy($translator)
     {
+        $translator = $this->find($translator);
+        if (!$translator) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
         $translator->delete();
         return $this->successResponse('مترجم با موفقیت حذف شد', '1');
     }
 
-    public function restoreData(Translator $translator)
+    public function restoreData($translator)
     {
-        $translator->restore();
-        return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
+        $translator = Translator::onlyTrashed()->find($translator);
+        if ($translator) {
+            $translator->restore();
+            return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
+        } else return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
     }
 }

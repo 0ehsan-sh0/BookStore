@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\MainCategory;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -24,9 +25,10 @@ class UpdateMainCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $mainCategory = $this->route('main_category');
+        $main_category = MainCategory::find($this->route('main_category'));
+        if (!$main_category) return ['main_category' => 'required|exists:main_categories,id'];
         return [
-            'url' => 'required|regex:/^[a-zA-Z0-9-]+$/|unique:main_categories,url,'. $mainCategory->id,
+            'url' => 'required|regex:/^[a-zA-Z0-9-]+$/|unique:main_categories,url,'. $main_category->id,
             'name' => 'required'
         ];
     }
@@ -54,7 +56,9 @@ class UpdateMainCategoryRequest extends FormRequest
             'url.required' => 'مسیر دسته بندی اصلی الزامی است',
             'url.regex' => 'لطفا مسیر معتبر وارد کنید',
             'url.unique' => 'مسیر دسته بندی اصلی نمیتواند تکراری باشد',
-            'name.required' => 'نام دسته بندی اصلی الزامی است'
+            'name.required' => 'نام دسته بندی اصلی الزامی است',
+            'main_category.exists' => 'مسیر مورد نظر معتبر نیست',
+            'main_category.required' => 'مسیر مورد نظر معتبر نیست'
         ];
     }
 }
