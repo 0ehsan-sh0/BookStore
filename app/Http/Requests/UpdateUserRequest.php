@@ -31,13 +31,14 @@ class UpdateUserRequest extends FormRequest
             'name' => 'required',
             'lastname' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'current_password' => 'nullable|min:8',
             'password' => 'nullable|min:8|confirmed',
-            'melicode' => 'required|iran_national_id',
+            'melicode' => 'required|iran_national_id|unique:users,melicode,'. $user->id,
             'birthdate' => 'required|date',
             'gender' => 'required|in:male,female',
             'state' => 'required',
             'city' => 'required',
-            'role' => 'required|in:user,admin',
+            'role' => 'nullable|in:user,admin'
         ];
     }
 
@@ -68,15 +69,16 @@ class UpdateUserRequest extends FormRequest
             'email.email' => 'لطفا ایمیل را صحیح وارد کنید',
             'password.confirmed' => 'رمز عبور با تکرار آن مطابقت ندارد',
             'password.min' => 'رمز عبور باید حداقل 8 کاراکتر باشد',
+            'current_password.min' => 'رمز عبور باید حداقل 8 کاراکتر باشد',
             'melicode.required' => 'کد ملی الزامی است',
             'melicode.iran_national_id' => 'کد ملی را صحیح وارد کنید',
+            'melicode.unique' => 'کد ملی قبلا در سایت ثبت شده است',
             'birthdate.required' => 'تاریخ تولد الزامی است',
             'birthdate.date' => 'لطفا تاریخ تولد را صحیح وارد کنید',
             'gender.required' => 'لطفا جنسیت را وارد کنید',
             'gender.in' => 'لطفا جنسیت را صحیح وارد کنید',
             'state.required' => 'لطفا استان را وارد کنید',
             'city.required' => 'لطفا شهر را وارد کنید',
-            'role.required' => 'لطفا سطح دسترسی را وارد کنید',
             'role.in' => 'لطفا سطح دسترسی را درست وارد کنید',
             'user.exists' => 'مسیر مورد نظر معتبر نیست',
             'user.required' => 'مسیر مورد نظر معتبر نیست'

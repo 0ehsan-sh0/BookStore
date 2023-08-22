@@ -22,6 +22,22 @@ use App\Http\Controllers\MainCategoryController;
 |
 */
 
+// Public Routes ---------------------------------------------------------------------------
+// Writer
+Route::resource('writer', WriterController::class)->only('show');
+// Translator
+Route::resource('translator', TranslatorController::class)->only('show');
+// Book
+Route::get('book/{main_category}/{category}', [CategoryController::class, 'categoryBooks'])->name('book.getCategoryBook');
+Route::resource('book', BookController::class)->only('index', 'show');
+// Main Category and Categories
+Route::resource('main_category', MainCategoryController::class)->only('index');
+// Authentication Routes
+Route::post('register', [UserController::class, 'register'])->name('register');
+Route::post('login', [UserController::class, 'login'])->name('login');
+// --------------------------------------------------------------------------- Public Routes
+
+
 // Authenticated Routes ---------------------------------------------------------------------------
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [UserController::class, 'logout'])->name('logout');
@@ -29,6 +45,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('user', UserController::class)->only('update', 'destroy');
 });
 // --------------------------------------------------------------------------- Authenticated Routes
+
 
 // Admin Routes ---------------------------------------------------------------------------
 Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
@@ -95,25 +112,8 @@ Route::middleware(['auth:sanctum', 'role:user'])->group(function () {
     // Comment
     Route::resource('comment', CommentController::class)->only('store', 'update');
     // Cart
-    Route::resource('cart', CartController::class)->only('store', 'update', 'destroy', 'show');
+    Route::resource('cart', CartController::class)->only('store', 'update', 'show');
     // Address
     Route::resource('address', AddressController::class)->only('store', 'update', 'destroy', 'show');
 });
 // --------------------------------------------------------------------------- User Routes
-
-
-// Public Routes ---------------------------------------------------------------------------
-// Writer
-Route::resource('writer', WriterController::class)->only('show');
-// Translator
-Route::resource('translator', TranslatorController::class)->only('show');
-// Book
-Route::get('book/{main_category}/{category}', [CategoryController::class, 'categoryBooks'])->name('book.getCategoryBook');
-Route::resource('book', BookController::class)->only('index', 'show');
-// Main Category and Categories
-Route::resource('main_category', MainCategoryController::class)->only('index');
-// Authentication Routes
-Route::post('register', [UserController::class, 'register'])->name('register');
-Route::post('login', [UserController::class, 'login'])->name('login');
-
-// --------------------------------------------------------------------------- Public Routes

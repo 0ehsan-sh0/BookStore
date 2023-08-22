@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreAddressRequest;
 use App\Http\Requests\UpdateAddressRequest;
-use App\Models\Address;
 
 class AddressController extends ApiController
 {
@@ -32,7 +33,9 @@ class AddressController extends ApiController
      */
     public function store(StoreAddressRequest $request)
     {
-        Address::create($request->all());
+        $requestData = $request->all();
+        $requestData['user_id'] = Auth::id(); // Add the authenticated user's ID to the request data
+        Address::create($requestData);
         return $this->successResponse('آدرس با موفقیت افزوده شد', '1');
     }
 
@@ -43,6 +46,8 @@ class AddressController extends ApiController
     {
         $address = $this->find($address);
         if (!$address) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
+        if (Auth::id() !== $address->user_id)
+            return $this->errorResponse('خطای سطح دسترسی', '', 401);
         return $this->successResponse('عملیات با موفقیت انجام شد', $address);
     }
 
@@ -52,6 +57,8 @@ class AddressController extends ApiController
     public function update(UpdateAddressRequest $request, $address)
     {
         $address = $this->find($address);
+        if (Auth::id() !== $address->user_id)
+            return $this->errorResponse('خطای سطح دسترسی', '', 401);
         $address->update($request->all());
         return $this->successResponse('آدرس با موفقیت بروزرسانی شد', '1');
     }
@@ -63,6 +70,8 @@ class AddressController extends ApiController
     {
         $address = $this->find($address);
         if (!$address) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
+        if (Auth::id() !== $address->user_id)
+            return $this->errorResponse('خطای سطح دسترسی', '', 401);
         $address->delete();
         return $this->successResponse('آدرس با موفقیت حذف شد', '1');
     }
@@ -73,7 +82,6 @@ class AddressController extends ApiController
         if ($address) {
             $address->restore();
             return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
-        }
-        else return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
+        } else return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
     }
 }

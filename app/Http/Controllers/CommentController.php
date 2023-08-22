@@ -35,7 +35,11 @@ class CommentController extends ApiController
      */
     public function store(StoreCommentRequest $request)
     {
-        Comment::create($request->all());
+        Comment::create([
+            'comment' => $request->comment,
+            'book_id' => $request->book_id,
+            'user_id' => Auth::id()
+        ]);
         return $this->successResponse('کامنت با موفقیت افزوده شد', '1');
     }
 
@@ -46,8 +50,11 @@ class CommentController extends ApiController
     {
         $comment = $this->find($comment);
         if (!$comment) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
-        $comment->update($request->all());
-        return $this->successResponse('کامنت با موفقیت بروزرسانی شد', '1');
+        if (Auth::id() === $comment->user_id) {
+            $comment->update($request->only('comment'));
+            return $this->successResponse('کامنت با موفقیت بروزرسانی شد', '1');
+        }
+        return $this->errorResponse('خطای سطح دسترسی', '', 401);
     }
 
     /**
@@ -57,11 +64,11 @@ class CommentController extends ApiController
     {
         $comment = $this->find($comment);
         if (!$comment) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
-        if (Auth::user()->id === $comment->user_id || Auth::user()->role === 'admin') {
+        if (Auth::id() === $comment->user_id || Auth::user()->role === 'admin') {
             $comment->delete();
             return $this->successResponse('کامنت با موفقیت حذف شد', '1');
         }
-        return $this->errorResponse('شما نمیتوانید نظرات دیگران را حذف کنید', '', 401);
+        return $this->errorResponse('خطای سطح دسترسی', '', 401);
     }
 
     public function restoreData($comment)

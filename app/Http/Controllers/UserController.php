@@ -32,7 +32,7 @@ class UserController extends ApiController
             return $this->successResponse(
                 'ثبت نام با موفقیت انجام شد',
                 [
-                    'token' => $user->createToken('Api token')
+                    'token' => $user->createToken('Api token id : ' . $user->id)
                         ->plainTextToken,
                     'user' => $user
                 ]
@@ -45,15 +45,14 @@ class UserController extends ApiController
     public function login(Request $request)
     {
         try {
-            if (!Auth::attempt($request->only('email', 'password'))) {
+            if (!Auth::attempt($request->only('email', 'password')))
                 return $this->errorResponse('ایمیل یا رمز عبور اشتباه است', '', 401);
-            }
             // Authentication passed...
             $user = User::with('comments', 'carts', 'addresses')->where('email', $request->email)->first();
             return $this->successResponse(
                 'ورود با موفقیت انجام شد',
                 [
-                    'token' => $user->createToken('Api token')
+                    'token' => $user->createToken('Api token id :' . $user->id)
                         ->plainTextToken,
                     'user' => $user
                 ]
@@ -100,22 +99,30 @@ class UserController extends ApiController
     public function update(UpdateUserRequest $request, $user)
     {
         $user = $this->find($user);
-        $user->name = $request->name;
-        $user->lastname = $request->lastname;
-        $user->email = $request->email;
-        if ($request->has('password')) {
-            $user->password = Hash::make($request->password);
+        if ($user->id === Auth::id() || Auth::user()->role === 'admin') {
+            $user->name = $request->name;
+            $user->lastname = $request->lastname;
+            $user->email = $request->email;
+            if ($request->has('password')) {
+                if ($request->has('current_password')) {
+                    if (Hash::check($request->current_password, Auth::user()->password)) {
+                        $user->password = Hash::make($request->password);
+                    } else return $this->errorResponse('خطای رمز عبور', 'رمز عبور کنونی نادرست است', 401);
+                } else if (Auth::user()->role === 'admin') $user->password = Hash::make($request->password);
+            }
+            $user->melicode = $request->melicode;
+            $user->birthdate = $request->birthdate;
+            $user->gender = $request->gender;
+            $user->state = $request->state;
+            $user->city = $request->city;
+            if (Auth::user()->role === 'admin')
+                $user->role = $request->role;
+
+            $user->save();
+
+            return $this->successResponse('اطلاعات با موفقیت بروزرسانی شد', $user);
         }
-        $user->melicode = $request->melicode;
-        $user->birthdate = $request->birthdate;
-        $user->gender = $request->gender;
-        $user->state = $request->state;
-        $user->city = $request->city;
-        $user->role = $request->role;
-
-        $user->save();
-
-        return $this->successResponse('اطلاعات کاربر با موفقیت بروزرسانی شد', $user);
+        return $this->errorResponse('خطای سطح دسترسی', '', 401);
     }
 
     /**
@@ -125,8 +132,11 @@ class UserController extends ApiController
     {
         $user = $this->find($user);
         if (!$user) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
-        $user->delete();
-        return $this->successResponse('کاربر با موفقیت حذف شد', '1');
+        if ($user->id === Auth::id() || Auth::user()->role === 'admin') {
+            $user->delete();
+            return $this->successResponse('کاربر با موفقیت حذف شد', '1');
+        }
+        return $this->errorResponse('خطای سطح دسترسی', '', 401);
     }
 
     public function restoreData($user)

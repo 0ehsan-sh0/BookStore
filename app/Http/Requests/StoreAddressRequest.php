@@ -32,8 +32,7 @@ class StoreAddressRequest extends FormRequest
             'state' => 'required',
             'place_number' => 'required|unique:addresses|numeric',
             'post_code' => 'required|unique:addresses|numeric',
-            'address' => 'required',
-            'user_id' => 'required|exists:users,id'
+            'address' => 'required'
         ];
     }
 
@@ -70,9 +69,7 @@ class StoreAddressRequest extends FormRequest
             'post_code.required' => 'کد پستی الزامی است',
             'post_code.unique' => 'کد پستی تکراری است',
             'post_code.numeric' => 'کد پستی باید عددی باشد',
-            'address.required' => 'آدرس الزامی است',
-            'user_id.required' => 'شناسه کاربر الزامی است',
-            'user_id.exists' => 'کاربر مورد نظر وجود ندارد'
+            'address.required' => 'آدرس الزامی است'
         ];
     }
 }

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCartRequest;
-use App\Http\Requests\UpdateCartRequest;
 use Carbon\Carbon;
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreCartRequest;
+use App\Http\Requests\UpdateCartRequest;
 use Illuminate\Support\Facades\Validator;
 
 class CartController extends ApiController
@@ -60,7 +61,7 @@ class CartController extends ApiController
             'ischeckedout' => $request->ischeckedout,
             'checkedout_time' => $checkedout_time,
             'total_price' => 0,
-            'user_id' => $request->user_id
+            'user_id' => Auth::id()
         ];
         $cart_created = Cart::create($cart);
 
@@ -84,6 +85,8 @@ class CartController extends ApiController
         $cart = Cart::with(['user:id,name,lastname,email', 'books:id,name,photo,price,isbn'])
             ->find($cart);
         if (!$cart) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
+        if (Auth::id() !== $cart->user_id)
+            return $this->errorResponse('خطای سطح دسترسی', '', 401);
         return $this->successResponse('عملیات با موفقیت انجام شد', $cart);
     }
 
@@ -120,17 +123,6 @@ class CartController extends ApiController
         $cart->total_price = $totalPrice;
         $cart->save();
         return $this->successResponse('سبد خرید با موفقیت بروزرسانی شد', '1');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($cart)
-    {
-        $cart = $this->find($cart);
-        if (!$cart) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
-        $cart->delete();
-        return $this->successResponse('سبد خرید با موفقیت حذف شد', '1');
     }
 
     public function restoreData($cart)
