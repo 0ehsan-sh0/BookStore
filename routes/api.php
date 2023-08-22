@@ -42,7 +42,7 @@ Route::post('login', [UserController::class, 'login'])->name('login');
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [UserController::class, 'logout'])->name('logout');
     Route::resource('comment', CommentController::class)->only('destroy');
-    Route::resource('user', UserController::class)->only('update', 'destroy');
+    Route::resource('user', UserController::class)->only('destroy');
 });
 // --------------------------------------------------------------------------- Authenticated Routes
 
@@ -66,7 +66,7 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::post('translator/restore/{translator}', [TranslatorController::class, 'restoreData'])->withTrashed()->name('translator.restore');
     Route::resource('translator', TranslatorController::class)->only('index', 'store', 'update', 'destroy');
     // ------------------- Translator Routes
-    
+
     // Book Routes -------------------
     Route::get('book/trashed', [BookController::class, 'trashed'])->name('book.trashed');
     Route::post('book/restore/{book}', [BookController::class, 'restoreData'])->withTrashed()->name('book.restore');
@@ -78,37 +78,39 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::resource('main_category', MainCategoryController::class)->only('store', 'update', 'destroy');
     Route::get('main_category/trashed', [MainCategoryController::class, 'trashed'])->name('main_category.trashed');
     // ------------------- Main Category Routes
-    
+
     // Category Routes -------------------
     Route::post('category/restore/{category}', [CategoryController::class, 'restoreData'])->withTrashed()->name('category.restore');
     Route::resource('category', CategoryController::class)->only('index', 'store', 'update', 'destroy');
     Route::get('category/trashed', [CategoryController::class, 'trashed'])->name('category.trashed');
     // ------------------- Category Routes
-    
+
     // User Routes -------------------
     Route::post('user/restore/{user}', [UserController::class, 'restoreData'])->withTrashed()->name('user.restore');
     Route::get('user/trashed', [UserController::class, 'trashed'])->name('user.trashed');
     Route::resource('user', UserController::class)->only('show', 'index');
     // ------------------- User Routes
-    
+
     // Cart Routes -------------------
     Route::get('cart/trashed', [CartController::class, 'trashed'])->name('cart.trashed');
     Route::post('cart/restore/{cart}', [CartController::class, 'restoreData'])->withTrashed()->name('cart.restore');
     Route::resource('cart', CartController::class)->only('index');
     // ------------------- Cart Routes
-    
+
     // Address Routes -------------------
     Route::get('address/trashed', [AddressController::class, 'trashed'])->name('address.trashed');
     Route::post('address/restore/{address}', [AddressController::class, 'restoreData'])->withTrashed()->name('address.restore');
     Route::resource('address', AddressController::class)->only('index');
     // ------------------- Address Routes
-    
+
 });
 // --------------------------------------------------------------------------- Admin Routes
 
 
 // User Routes ---------------------------------------------------------------------------
 Route::middleware(['auth:sanctum', 'role:user'])->group(function () {
+    // User
+    Route::resource('user', UserController::class)->only('update');
     // Comment
     Route::resource('comment', CommentController::class)->only('store', 'update');
     // Cart

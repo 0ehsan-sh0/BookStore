@@ -99,16 +99,14 @@ class UserController extends ApiController
     public function update(UpdateUserRequest $request, $user)
     {
         $user = $this->find($user);
-        if ($user->id === Auth::id() || Auth::user()->role === 'admin') {
+        if ($user->id === Auth::id()) {
             $user->name = $request->name;
             $user->lastname = $request->lastname;
             $user->email = $request->email;
-            if ($request->has('password')) {
-                if ($request->has('current_password')) {
-                    if (Hash::check($request->current_password, Auth::user()->password)) {
-                        $user->password = Hash::make($request->password);
-                    } else return $this->errorResponse('خطای رمز عبور', 'رمز عبور کنونی نادرست است', 401);
-                } else if (Auth::user()->role === 'admin') $user->password = Hash::make($request->password);
+            if ($request->has('password') && $request->has('current_password')) {
+                if (Hash::check($request->current_password, Auth::user()->password))
+                    $user->password = Hash::make($request->password);
+                else return $this->errorResponse('خطای رمز عبور', 'رمز عبور کنونی نادرست است', 401);
             }
             $user->melicode = $request->melicode;
             $user->birthdate = $request->birthdate;
