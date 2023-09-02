@@ -44,10 +44,12 @@ class UpdateBookRequest extends FormRequest
             'publish_year' => 'required|numeric|min:1000',
             'count' => 'required|numeric|min:0',
             'writer_id' => 'required|exists:writers,id',
-            'categories' => 'required',
+            'categories' => 'required|array',
             'categories.*' => 'exists:categories,id',
-            'translators' => 'required',
-            'translators.*' => 'exists:translators,id'
+            'translators' => 'required|array',
+            'translators.*' => 'exists:translators,id',
+            'tags' => 'required|array',
+            'tags.*' => 'exists:tags,id'
         ];
     }
 
@@ -101,6 +103,8 @@ class UpdateBookRequest extends FormRequest
             'categories.*.exists' => 'دسته بندی مورد نظر یافت نشد',
             'translators.required' => 'این فیلد الزامی است',
             'translators.*.exists' => 'مترجم مورد نظر یافت نشد',
+            'tags.required' => 'حداقل یک تگ الزامی است',
+            'tags.*.exists' => 'تگ مورد نظر یافت نشد',
             'book.exists' => 'مسیر مورد نظر معتبر نیست'
         ];
     }

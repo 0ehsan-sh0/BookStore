@@ -26,7 +26,7 @@ class BookController extends ApiController
 
     public function trashed()
     {
-        return $this->successResponse('عملیات با موفقیت انجام شد', Book::onlyTrashed()->with(['categories', 'translators:id,name'])->latest()->paginate(20));
+        return $this->successResponse('عملیات با موفقیت انجام شد', Book::onlyTrashed()->with(['categories', 'translators:id,name', 'writer:id,name'])->latest()->paginate(20));
     }
 
     /**
@@ -56,6 +56,7 @@ class BookController extends ApiController
         $book_created = Book::create($book);
         $book_created->categories()->attach($request->input('categories', []));
         $book_created->translators()->attach($request->input('translators', []));
+        $book_created->tags()->attach($request->input('tags', []));
         return $this->successResponse('کتاب با موفقیت افزوده شد', '1');
     }
 
@@ -64,7 +65,7 @@ class BookController extends ApiController
      */
     public function show($book)
     {
-        $book = Book::with(['categories', 'translators:id,name', 'writer:id,name', 'comments'])
+        $book = Book::with(['categories', 'translators:id,name', 'writer:id,name', 'comments', 'tags:name,url'])
             ->find($book);
         if (!$book) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
         return $this->successResponse('عملیات با موفقیت انجام شد', $book);
@@ -115,6 +116,7 @@ class BookController extends ApiController
         $book->update($book_update);
         $book->categories()->sync($request->input('categories', []));
         $book->translators()->sync($request->input('translators', []));
+        $book->tags()->sync($request->input('tags', []));
         return $this->successResponse('اطلاعات کتاب با موفقیت بروزرسانی شد', '1');
     }
 

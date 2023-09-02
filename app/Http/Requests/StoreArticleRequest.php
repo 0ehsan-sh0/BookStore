@@ -2,13 +2,12 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 
-
-class StoreCommentRequest extends FormRequest
+class StoreArticleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,17 +24,14 @@ class StoreCommentRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [
-            'comment' => 'required',
+        return [
+            'title' => 'required',
+            'subtitle' => 'required',
+            'description' => 'required',
+            'photo' => 'nullable|mimes:jpg,jpeg,png|max:3072',
+            'tags' => 'required|array',
+            'tags.*' => 'exists:tags,id'
         ];
-        $hasBook = $this->book_id;
-        $hasArticle = $this->article_id;
-        if ($hasBook) {
-            $rules['book_id'] = 'required|exists:books,id';
-            $this->article_id = null;
-        } else if ($hasArticle) $rules['article_id'] = 'required|exists:articles,id';
-        else $rules['empty'] = 'required';
-        return $rules;
     }
 
     /**
@@ -58,12 +54,13 @@ class StoreCommentRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'comment.required' => 'لطفا نظرت رو بنویس',
-            'book_id.required' => 'کتابی که میخوای براش نظر بدی رو انتخاب کن',
-            'book_id.exists' => 'کتاب مورد نظر یافت نشد',
-            'article_id.required' => 'مقاله ای که میخوای براش نظر بدی رو انتخاب کن',
-            'article_id.exists' => 'مقاله مورد نظر یافت نشد',
-            'empty.required' => 'خطا'
+            'title.required' => 'عنوان مقاله الزامی است',
+            'subtitle.required' => 'خلاصه مقاله الزامی است',
+            'description.required' => 'توضیحات مقاله الزامی است',
+            'photo.mimes' => 'لطفا فایل با فرمت عکس وارد کنید',
+            'photo.max' => 'حجم فایل نباید بیشتر از سه مگابایت باشد',
+            'tags.required' => 'حداقل یک تگ الزامی است',
+            'tags.*.exists' => 'تگ مورد نظر یافت نشد'
         ];
     }
 }

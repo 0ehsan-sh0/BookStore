@@ -40,7 +40,9 @@ class StoreBookRequest extends FormRequest
                 'categories' => 'required|array',
                 'categories.*' => 'exists:categories,id',
                 'translators' => 'required|array',
-                'translators.*' => 'exists:translators,id'
+                'translators.*' => 'exists:translators,id',
+                'tags' => 'required|array',
+                'tags.*' => 'exists:tags,id'
         ];
     }
 
@@ -94,7 +96,9 @@ class StoreBookRequest extends FormRequest
             'categories.required' => 'حداقل یک دسته بندی الزامی است',
             'categories.*.exists' => 'دسته بندی مورد نظر یافت نشد',
             'translators.required' => 'حداقل یک مترجم الزامی است',
-            'translators.*.exists' => 'مترجم مورد نظر یافت نشد'
+            'translators.*.exists' => 'مترجم مورد نظر یافت نشد',
+            'tags.required' => 'حداقل یک تگ الزامی است',
+            'tags.*.exists' => 'تگ مورد نظر یافت نشد'
         ];
     }
 }

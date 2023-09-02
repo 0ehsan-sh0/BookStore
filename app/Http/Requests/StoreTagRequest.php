@@ -7,8 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 
-
-class StoreCommentRequest extends FormRequest
+class StoreTagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,17 +24,10 @@ class StoreCommentRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [
-            'comment' => 'required',
+        return [
+            'url' => 'required|unique:tags|regex:/^[a-zA-Z0-9-]+$/',
+            'name' => 'required'
         ];
-        $hasBook = $this->book_id;
-        $hasArticle = $this->article_id;
-        if ($hasBook) {
-            $rules['book_id'] = 'required|exists:books,id';
-            $this->article_id = null;
-        } else if ($hasArticle) $rules['article_id'] = 'required|exists:articles,id';
-        else $rules['empty'] = 'required';
-        return $rules;
     }
 
     /**
@@ -58,12 +50,10 @@ class StoreCommentRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'comment.required' => 'لطفا نظرت رو بنویس',
-            'book_id.required' => 'کتابی که میخوای براش نظر بدی رو انتخاب کن',
-            'book_id.exists' => 'کتاب مورد نظر یافت نشد',
-            'article_id.required' => 'مقاله ای که میخوای براش نظر بدی رو انتخاب کن',
-            'article_id.exists' => 'مقاله مورد نظر یافت نشد',
-            'empty.required' => 'خطا'
+            'url.required' => 'مسیر تگ الزامی است',
+            'url.regex' => 'لطفا مسیر معتبر وارد کنید',
+            'url.unique' => 'مسیر تگ نمیتواند تکراری باشد',
+            'name.required' => 'نام تگ الزامی است'
         ];
     }
 }

@@ -35,11 +35,8 @@ class CommentController extends ApiController
      */
     public function store(StoreCommentRequest $request)
     {
-        Comment::create([
-            'comment' => $request->comment,
-            'book_id' => $request->book_id,
-            'user_id' => Auth::id()
-        ]);
+        $request['user_id'] = Auth::id();
+        Comment::create($request->all());
         return $this->successResponse('کامنت با موفقیت افزوده شد', '1');
     }
 

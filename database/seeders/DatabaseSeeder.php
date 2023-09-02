@@ -36,7 +36,17 @@ class DatabaseSeeder extends Seeder
         \App\Models\Writer::factory(15)->create();
         $translators = \App\Models\Translator::factory(20)->create();
         $books = \App\Models\Book::factory(150)->create();
+        // Creating the admin user
+        \App\Models\User::factory()->create([
+            'name' => 'admin',
+            'lastname' => 'main',
+            'email' => 'admin@example.com',
+            'role' => 'admin',
+            'password' => Hash::make('admin123')
+        ]);
+        $articles = \App\Models\Article::factory(40)->create();
         \App\Models\Comment::factory(300)->create();
+        $tags = \App\Models\Tag::factory(35)->create();
         // Attach random translators to each book
         foreach ($books as $book) {
             $hasTranslators = random_int(0, 1);
@@ -46,19 +56,24 @@ class DatabaseSeeder extends Seeder
                 );
             }
         }
+        //Attach random tags to each book
+        foreach ($books as $book) {
+            $book->tags()->attach(
+                $tags->random(rand(1, 5))->pluck('id')->toArray()
+            );
+        }
         // Attach random categories to each book
         foreach ($books as $book) {
             $hasTranslators = random_int(0, 1);
-                $book->categories()->attach(
-                    $categories->random(rand(1, 3))->pluck('id')->toArray()
-                );
+            $book->categories()->attach(
+                $categories->random(rand(1, 3))->pluck('id')->toArray()
+            );
         }
-        \App\Models\User::factory()->create([
-            'name' => 'admin',
-            'lastname' => 'main',
-            'email' => 'admin@example.com',
-            'role' => 'admin',
-            'password' => Hash::make('admin123')
-        ]);
+        // Attach random tags to the articles
+        foreach ($articles as $article) {
+            $article->tags()->attach(
+                $tags->random(rand(1, 5))->pluck('id')->toArray()
+            );
+        }
     }
 }
