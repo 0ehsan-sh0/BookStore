@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
+use App\Models\MainCategory;
 use App\Http\Requests\StoreMainCategoryRequest;
 use App\Http\Requests\UpdateMainCategoryRequest;
-use App\Models\MainCategory;
 
 class MainCategoryController extends ApiController
 {
@@ -25,6 +26,23 @@ class MainCategoryController extends ApiController
     public function trashed()
     {
         return $this->successResponse('عملیات با موفقیت انجام شد', MainCategory::with('categories')->onlyTrashed()->get());
+    }
+
+    /**
+     * Show books of a specific main category
+     */
+    public function mainCategoryBooks($main_category)
+    {
+        $main_category = MainCategory::where('url', $main_category)->first();
+        if ($main_category) {   //check if the main category exists
+            $books = Book::with(['categories', 'translators:id,name', 'writer:id,name'])
+                ->whereHas('categories', function ($query) use ($main_category) { // separate each book with the specified category
+                    $query->where('main_category_id', $main_category->id);
+                })
+                ->latest()
+                ->paginate(20);
+            return $this->successResponse('عملیات با موفقیت انجام شد', $books);
+        } else return $this->errorResponse('لطفا خطاهای زیر را بررسی کنید', 'مسیر مورد نظر معتبر نیست');
     }
 
     /**

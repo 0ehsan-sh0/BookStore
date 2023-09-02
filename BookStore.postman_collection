@@ -1,0 +1,4727 @@
+{
+	"info": {
+		"_postman_id": "d5493974-14ec-4c8e-b591-90f5ffb74b38",
+		"name": "BookStore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28290999"
+	},
+	"item": [
+		{
+			"name": "Public Routes",
+			"item": [
+				{
+					"name": "Writer",
+					"item": [
+						{
+							"name": "Writer-Get-one",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/writer/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"writer",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Translator",
+					"item": [
+						{
+							"name": "Translator-Get-one",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/translator/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"translator",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Book",
+					"item": [
+						{
+							"name": "Book-Get-all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/book",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"book"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Book-Get-one",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/book/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"book",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Book-Get-by-Category",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/books/historical/Parthians",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"books",
+										"historical",
+										"Parthians"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Book-Get-by-Main-category",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/books/historical",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"books",
+										"historical"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Categories",
+					"item": [
+						{
+							"name": "Main-category-Get-all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/main_category",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"main_category"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Authentication Routes",
+					"item": [
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "lastname",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/register",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Register",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "name",
+													"value": "احسان",
+													"type": "text"
+												},
+												{
+													"key": "lastname",
+													"value": "شریعتی",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "12345678",
+													"type": "text"
+												},
+												{
+													"key": "password_confirmation",
+													"value": "12345678",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "ehsan@gmail.com",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{LocalHostApi}}/register",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"register"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Login",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "14|uXrESw7Ly7F1W3EpTR0RoaqK7fIt8bivSTg71JC2",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "admin@example.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "admin123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/login",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Article",
+					"item": [
+						{
+							"name": "Article-Get-all",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/article",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"article"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Article-Get-one",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/article/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"article",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Book-and-Article-Get-by-Tag",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{LocalHostApi}}/tags/fantasy",
+							"host": [
+								"{{LocalHostApi}}"
+							],
+							"path": [
+								"tags",
+								"fantasy"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Routes",
+			"item": [
+				{
+					"name": "Cart",
+					"item": [
+						{
+							"name": "Cart-Get-one",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/cart/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"cart",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cart-Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "ischeckedout",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "user_id",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "books[]",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "counts[]",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "books[]",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "counts[]",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/cart",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"cart"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Cart-Create",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "ischeckedout",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "books[]",
+													"value": "1",
+													"description": "دقت کنید کتاب و تعداد آن در هر آرایه به ترتیب روبروی هم باشند.",
+													"type": "text"
+												},
+												{
+													"key": "counts[]",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "books[]",
+													"value": "2",
+													"description": "دقت کنید کتاب و تعداد آن در هر آرایه به ترتیب روبروی هم باشند.",
+													"type": "text"
+												},
+												{
+													"key": "counts[]",
+													"value": "5",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{LocalHostApi}}/cart",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"cart"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Cart-Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "ischeckedout",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "user_id",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "books[]",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "counts[]",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "books[]",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "counts[]",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/cart/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"cart",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Cart-Update",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "ischeckedout",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "user_id",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "books[]",
+													"value": "1",
+													"description": "دقت کنید کتاب و تعداد آن در هر آرایه به ترتیب روبروی هم باشند.",
+													"type": "text"
+												},
+												{
+													"key": "counts[]",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "books[]",
+													"value": "3",
+													"description": "دقت کنید کتاب و تعداد آن در هر آرایه به ترتیب روبروی هم باشند.",
+													"type": "text"
+												},
+												{
+													"key": "counts[]",
+													"value": "3",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{LocalHostApi}}/cart/1",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"cart",
+												"1"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Address",
+					"item": [
+						{
+							"name": "Address-Get-one",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/address/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"address",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Address-Get-one",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{LocalHostApi}}/address/2",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"address",
+												"2"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Address-Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "lastname",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "state",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "place_number",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "post_code",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "user_id",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/address",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"address"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Address-Create",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "name",
+													"value": "احسان",
+													"type": "text"
+												},
+												{
+													"key": "lastname",
+													"value": "شریعتی",
+													"type": "text"
+												},
+												{
+													"key": "phone",
+													"value": "09111111111",
+													"type": "text"
+												},
+												{
+													"key": "city",
+													"value": "اصفهان",
+													"type": "text"
+												},
+												{
+													"key": "state",
+													"value": "اصفهان",
+													"type": "text"
+												},
+												{
+													"key": "place_number",
+													"value": "02133333333",
+													"type": "text"
+												},
+												{
+													"key": "post_code",
+													"value": "213241243423",
+													"type": "text"
+												},
+												{
+													"key": "address",
+													"value": "خیابان اصلی",
+													"type": "text"
+												},
+												{
+													"key": "user_id",
+													"value": "1",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{LocalHostApi}}/address",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"address"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Address-Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "lastname",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "state",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "place_number",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "post_code",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/address/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"address",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Address-Update",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "name",
+													"value": "احسان",
+													"type": "text"
+												},
+												{
+													"key": "lastname",
+													"value": "شریعتی",
+													"type": "text"
+												},
+												{
+													"key": "phone",
+													"value": "09111111123",
+													"type": "text"
+												},
+												{
+													"key": "city",
+													"value": "اصفهان",
+													"type": "text"
+												},
+												{
+													"key": "state",
+													"value": "اصفهان",
+													"type": "text"
+												},
+												{
+													"key": "place_number",
+													"value": "02133333311",
+													"type": "text"
+												},
+												{
+													"key": "post_code",
+													"value": "213241243467",
+													"type": "text"
+												},
+												{
+													"key": "address",
+													"value": "خیابان اصلی , کوچه شهدا",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{LocalHostApi}}/address/2",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"address",
+												"2"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Address-Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/address/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"address",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Address-Delete",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{LocalHostApi}}/address/1",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"address",
+												"1"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Comment",
+					"item": [
+						{
+							"name": "Comment-Book-Create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "1|bmzLSTeI5GyXGGg81A1LWP0czP9zmH4hTUyWE64l",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "comment",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "book_id",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/comment",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"comment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Comment-Article-Create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "1|bmzLSTeI5GyXGGg81A1LWP0czP9zmH4hTUyWE64l",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "comment",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "article_id",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/comment",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"comment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Comment-Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "1|bmzLSTeI5GyXGGg81A1LWP0czP9zmH4hTUyWE64l",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "comment",
+											"value": "این یک متن تست است",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/comment/301",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"comment",
+										"301"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Comment-Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "9|BoAWBaIDGdbFcN6rNrGZnqubPoW2X5w7o0UPc2Fa",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/comment/231",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"comment",
+										"231"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "User-Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/user/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "User-Delete",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{LocalHostApi}}/user/1",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"user",
+												"1"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "User-Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "lastname",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "current_password",
+											"value": "",
+											"description": "Nullable",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"description": "Nullable",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "",
+											"description": "Nullable",
+											"type": "text"
+										},
+										{
+											"key": "melicode",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "birthdate",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "gender",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "state",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/user/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "User-Update",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "name",
+													"value": "احسان",
+													"type": "text"
+												},
+												{
+													"key": "lastname",
+													"value": "شریعتی",
+													"type": "text"
+												},
+												{
+													"key": "email",
+													"value": "ehsan@gmail.com",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "12345678",
+													"type": "text"
+												},
+												{
+													"key": "password_confirmation",
+													"value": "12345678",
+													"type": "text"
+												},
+												{
+													"key": "melicode",
+													"value": "1029584729",
+													"type": "text"
+												},
+												{
+													"key": "birthdate",
+													"value": "2004-04-01",
+													"type": "text"
+												},
+												{
+													"key": "gender",
+													"value": "male",
+													"type": "text"
+												},
+												{
+													"key": "state",
+													"value": "اصفهان",
+													"type": "text"
+												},
+												{
+													"key": "city",
+													"value": "اصفهان",
+													"type": "text"
+												},
+												{
+													"key": "role",
+													"value": "user",
+													"type": "text"
+												}
+											],
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{LocalHostApi}}/user/1",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"user",
+												"1"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|xeEQXH4ZYbqQ5TDvfaOFxsPEPYoJL8wq8LnP9FOB",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{LocalHostApi}}/logout",
+							"host": [
+								"{{LocalHostApi}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin Routes",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "User-Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/user/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "User-Delete",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{LocalHostApi}}/user/1",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"user",
+												"1"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "User-Get-all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/user",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User-Get-one",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/user/",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"user",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "User-get-one",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{LocalHostApi}}/user/1",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"user",
+												"1"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "User-Get-Trashed-data",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/user/trashed",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"user",
+										"trashed"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User-Restore",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/user/restore/",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"user",
+										"restore",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "User-Restore",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{LocalHostApi}}/user/restore/1",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"user",
+												"restore",
+												"1"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "User-Promote",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/user/promote/2",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"user",
+										"promote",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User-Demote",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/user/demote/2",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"user",
+										"demote",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Comment",
+					"item": [
+						{
+							"name": "Comment-Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "9|BoAWBaIDGdbFcN6rNrGZnqubPoW2X5w7o0UPc2Fa",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/comment/231",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"comment",
+										"231"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Comment-Get-all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/comment",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"comment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Comment-Get-Trashed-data",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/comment/trashed",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"comment",
+										"trashed"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Comment-Restore",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/comment/restore/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"comment",
+										"restore",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Translator",
+					"item": [
+						{
+							"name": "Translator-Get-all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/translator",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"translator"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Translator-Get-Trashed-data",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/translator/trashed",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"translator",
+										"trashed"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Translator-Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/translator",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"translator"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Translator-Create",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "احسان",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "این یک متن تست است",
+													"type": "text"
+												},
+												{
+													"key": "photo",
+													"type": "file",
+													"src": []
+												}
+											]
+										},
+										"url": {
+											"raw": "{{LocalHostApi}}/translator",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"translator"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Translator-Restore",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/translator/restore/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"translator",
+										"restore",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Translator-Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/translator/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"translator",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Translator-Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/translator/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"translator",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cart",
+					"item": [
+						{
+							"name": "Cart-Get-all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/cart",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"cart"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cart-Get-Trashed-data",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/cart/trashed",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"cart",
+										"trashed"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cart-Restore",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/cart/restore/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"cart",
+										"restore",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Writer",
+					"item": [
+						{
+							"name": "Writer-Get-all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/writer",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"writer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Writer-Get-Trashed-data",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/writer/trashed",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"writer",
+										"trashed"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Writer-Restore",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/writer/restore/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"writer",
+										"restore",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Writer-Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/writer",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"writer"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Writer-Create",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "محمد",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "این یک متن تست است.این ادامه متن تست است.",
+													"type": "text"
+												},
+												{
+													"key": "photo",
+													"type": "file",
+													"src": []
+												}
+											]
+										},
+										"url": {
+											"raw": "{{LocalHostApi}}/writer",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"writer"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Writer-Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "محمد",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "این یک متن تست است.این ادامه متن تست است.",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/writer/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"writer",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Writer-delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/writer/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"writer",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Address",
+					"item": [
+						{
+							"name": "Address-Get-all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/address",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"address"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Address-Get-Trashed-data",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/address/trashed",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"address",
+										"trashed"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Address-Restore",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/address/restore/5",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"address",
+										"restore",
+										"5"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Address-Restore",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{LocalHostApi}}/address/restore/1",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"address",
+												"restore",
+												"1"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Main-Category",
+					"item": [
+						{
+							"name": "Main-category-Get-Trashed-data",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/main_category/trashed",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"main_category",
+										"trashed"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Main-category-Create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "10|Krev1bFfRoSAKJeHGS5Qn2LILcgkAW64AmidH8Gn",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "url",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/main_category",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"main_category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Main-category-Restore",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/main_category/restore/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"main_category",
+										"restore",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Main-category-Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "url",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/main_category/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"main_category",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Main-category-Put",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "name",
+													"value": "نمایشنامه ها",
+													"type": "text"
+												},
+												{
+													"key": "url",
+													"value": "",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{LocalHostApi}}/main_category/1",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"main_category",
+												"1"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Main-category-Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/main_category/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"main_category",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Main-category-Delete",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{LocalHostApi}}/main_category/1",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"main_category",
+												"1"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Category",
+					"item": [
+						{
+							"name": "Category-Get-all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/category",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Category-Get-Trashed-data",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/category/trashed",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"category",
+										"trashed"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Category-Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "روانکاوی",
+											"type": "text"
+										},
+										{
+											"key": "main_category_id",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "url",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/category",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Category-Restore",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/category/restore/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"category",
+										"restore",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Category-Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "main_category_id",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "url",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/category/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"category",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Category-Put",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "name",
+													"value": "فانتزی",
+													"type": "text"
+												},
+												{
+													"key": "main_category_id",
+													"value": "4",
+													"type": "text"
+												},
+												{
+													"key": "url",
+													"value": "",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{LocalHostApi}}/category/2",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"category",
+												"2"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Category-Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/category/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"category",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Category-Delete",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{LocalHostApi}}/category/1",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"category",
+												"1"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Book",
+					"item": [
+						{
+							"name": "Book-Get-Trashed-data",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/book/trashed",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"book",
+										"trashed"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Book-Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "english_name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "print_series",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "isbn",
+											"value": "",
+											"description": "شابک",
+											"type": "text"
+										},
+										{
+											"key": "book_cover_type",
+											"value": "",
+											"description": "نوع جلد",
+											"type": "text"
+										},
+										{
+											"key": "format",
+											"value": "",
+											"description": "قطع",
+											"type": "text"
+										},
+										{
+											"key": "pages",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "publish_year",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "count",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "writer_id",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "categories[]",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "translators[]",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "tags[]",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/book",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"book"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Book-Create",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "هرگز سازش نکنید",
+													"type": "text"
+												},
+												{
+													"key": "english_name",
+													"value": "never split the diffrences",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "متن تست لورم اپیسوم.",
+													"type": "text"
+												},
+												{
+													"key": "price",
+													"value": "110000",
+													"type": "text"
+												},
+												{
+													"key": "photo",
+													"type": "file",
+													"src": []
+												},
+												{
+													"key": "print_series",
+													"value": "11",
+													"description": "سری چاپ",
+													"type": "text"
+												},
+												{
+													"key": "isbn",
+													"value": "978-600-8738-34-3",
+													"description": "شابک",
+													"type": "text"
+												},
+												{
+													"key": "book_cover_type",
+													"value": "شومیز",
+													"description": "نوع جلد",
+													"type": "text"
+												},
+												{
+													"key": "format",
+													"value": "رقعی",
+													"description": "قطع",
+													"type": "text"
+												},
+												{
+													"key": "pages",
+													"value": "256",
+													"type": "text"
+												},
+												{
+													"key": "publish_year",
+													"value": "1402",
+													"type": "text"
+												},
+												{
+													"key": "count",
+													"value": "12",
+													"description": "موجودی انبار",
+													"type": "text"
+												},
+												{
+													"key": "writer_id",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "categories[]",
+													"value": "4",
+													"type": "text"
+												},
+												{
+													"key": "categories[]",
+													"value": "3",
+													"type": "text"
+												},
+												{
+													"key": "translators[]",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "tags[]",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "tags[]",
+													"value": "5",
+													"type": "text"
+												},
+												{
+													"key": "tags[]",
+													"value": "24",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{LocalHostApi}}/book",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"book"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Book-Restore",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/book/restore/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"book",
+										"restore",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Book-Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "english_name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "print_series",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "isbn",
+											"value": "",
+											"description": "شابک",
+											"type": "text"
+										},
+										{
+											"key": "book_cover_type",
+											"value": "",
+											"description": "نوع جلد",
+											"type": "text"
+										},
+										{
+											"key": "format",
+											"value": "",
+											"description": "قطع",
+											"type": "text"
+										},
+										{
+											"key": "pages",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "publish_year",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "count",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "writer_id",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "categories",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "translators",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/book/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"book",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Book-Update",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/vnd.api+json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/vnd.api+json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "هرگز سازش نکنید",
+													"type": "text"
+												},
+												{
+													"key": "english_name",
+													"value": "never split the diffrences",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "متن تست لورم اپیسوم.",
+													"type": "text"
+												},
+												{
+													"key": "price",
+													"value": "120000",
+													"type": "text"
+												},
+												{
+													"key": "photo",
+													"type": "file",
+													"src": []
+												},
+												{
+													"key": "print_series",
+													"value": "11",
+													"description": "سری چاپ",
+													"type": "text"
+												},
+												{
+													"key": "isbn",
+													"value": "978-600-8738-34-3",
+													"description": "شابک",
+													"type": "text"
+												},
+												{
+													"key": "book_cover_type",
+													"value": "شومیز",
+													"description": "نوع جلد",
+													"type": "text"
+												},
+												{
+													"key": "format",
+													"value": "رقعی",
+													"description": "قطع",
+													"type": "text"
+												},
+												{
+													"key": "pages",
+													"value": "256",
+													"type": "text"
+												},
+												{
+													"key": "publish_year",
+													"value": "1402",
+													"type": "text"
+												},
+												{
+													"key": "count",
+													"value": "25",
+													"description": "موجودی انبار",
+													"type": "text"
+												},
+												{
+													"key": "writer_id",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "categories[]",
+													"value": "4",
+													"type": "text"
+												},
+												{
+													"key": "categories[]",
+													"value": "3",
+													"type": "text"
+												},
+												{
+													"key": "translators[]",
+													"value": "1",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{LocalHostApi}}/book/1",
+											"host": [
+												"{{LocalHostApi}}"
+											],
+											"path": [
+												"book",
+												"1"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Book-Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/book/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"book",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tag",
+					"item": [
+						{
+							"name": "Tag-Get-all",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/tag",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"tag"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Tag-Get-Trashed-data Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/tag/trashed",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"tag",
+										"trashed"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Tag-Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "فانتزی",
+											"type": "text"
+										},
+										{
+											"key": "url",
+											"value": "fantasy",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/tag",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"tag"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Tag-Restore",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/tag/restore/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"tag",
+										"restore",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Tag-Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "فانتزی جدید",
+											"type": "text"
+										},
+										{
+											"key": "url",
+											"value": "fantasy",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/tag/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"tag",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Tag-Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/tag/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"tag",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Article",
+					"item": [
+						{
+							"name": "Article-Get-Trashed-data",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "1|bmzLSTeI5GyXGGg81A1LWP0czP9zmH4hTUyWE64l",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/article/trashed",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"article",
+										"trashed"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Article-Create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "1|bmzLSTeI5GyXGGg81A1LWP0czP9zmH4hTUyWE64l",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "مقاله",
+											"type": "text"
+										},
+										{
+											"key": "subtitle",
+											"value": "زیر مقاله",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "description",
+											"value": "لورم اپیسوم متن ساختگی نامفهوم",
+											"type": "text"
+										},
+										{
+											"key": "tags[]",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "tags[]",
+											"value": "8",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/article",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"article"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Article-Restore",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "1|bmzLSTeI5GyXGGg81A1LWP0czP9zmH4hTUyWE64l",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/article/restore/3",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"article",
+										"restore",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Article-Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "1|bmzLSTeI5GyXGGg81A1LWP0czP9zmH4hTUyWE64l",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "title",
+											"value": "مقاله",
+											"type": "text"
+										},
+										{
+											"key": "subtitle",
+											"value": "زیر مقاله",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "متن تست است",
+											"type": "text"
+										},
+										{
+											"key": "tags[]",
+											"value": "5",
+											"type": "text"
+										},
+										{
+											"key": "tags[]",
+											"value": "8",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/article/3",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"article",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Article-Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "1|bmzLSTeI5GyXGGg81A1LWP0czP9zmH4hTUyWE64l",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{LocalHostApi}}/article/3",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"article",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|xeEQXH4ZYbqQ5TDvfaOFxsPEPYoJL8wq8LnP9FOB",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{LocalHostApi}}/logout",
+							"host": [
+								"{{LocalHostApi}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "LocalHostApi",
+			"value": "http://localhost:8000/api",
+			"type": "string"
+		}
+	]
+}
