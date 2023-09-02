@@ -94,6 +94,36 @@ class UserController extends ApiController
     }
 
     /**
+     * ----------------------------- Promoting and demoting users.
+     */
+    public function promote($user)
+    {
+        $user = $this->find($user);
+        if (!$user) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
+        if ($user->role === 'admin') return $this->errorResponse('لطفا خطاهای زیر را بررسی کنید',
+         'سطح دسترسی کاربر ادمین است و نیازی به ارتقا ندارد');
+        $user->update([
+            'role' => 'admin'
+        ]);
+        return $this->successResponse('عملیات با موفقیت انجام شد', 'سطح دسترسی کاربر به ادمین تغییر پیدا کرد');
+    }
+
+    public function demote($user)
+    {
+        $user = $this->find($user);
+        if (!$user) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
+        if ($user->role === 'user') return $this->errorResponse('لطفا خطاهای زیر را بررسی کنید',
+         'سطح دسترسی کاربر کاربر معمولی است و نیازی به تغییر ندارد');
+        $user->update([
+            'role' => 'user'
+        ]);
+        return $this->successResponse('عملیات با موفقیت انجام شد', 'سطح دسترسی کاربر به کاربر معمولی تغییر پیدا کرد');
+    }
+    /**
+     * Promoting and demoting users. -----------------------------
+     */
+
+    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateUserRequest $request, $user)
