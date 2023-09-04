@@ -100,8 +100,10 @@ class UserController extends ApiController
     {
         $user = $this->find($user);
         if (!$user) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
-        if ($user->role === 'admin') return $this->errorResponse('لطفا خطاهای زیر را بررسی کنید',
-         'سطح دسترسی کاربر ادمین است و نیازی به ارتقا ندارد');
+        if ($user->role === 'admin') return $this->errorResponse(
+            'لطفا خطاهای زیر را بررسی کنید',
+            'سطح دسترسی کاربر ادمین است و نیازی به ارتقا ندارد'
+        );
         $user->update([
             'role' => 'admin'
         ]);
@@ -112,8 +114,10 @@ class UserController extends ApiController
     {
         $user = $this->find($user);
         if (!$user) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
-        if ($user->role === 'user') return $this->errorResponse('لطفا خطاهای زیر را بررسی کنید',
-         'سطح دسترسی کاربر کاربر معمولی است و نیازی به تغییر ندارد');
+        if ($user->role === 'user') return $this->errorResponse(
+            'لطفا خطاهای زیر را بررسی کنید',
+            'سطح دسترسی کاربر کاربر معمولی است و نیازی به تغییر ندارد'
+        );
         $user->update([
             'role' => 'user'
         ]);
@@ -122,6 +126,14 @@ class UserController extends ApiController
     /**
      * Promoting and demoting users. -----------------------------
      */
+
+    /**
+     * Get the Auth user information including carts and addresses.
+     */
+    public function getInfo(){
+        $user = User::with(['addresses', 'carts'])->find(Auth::id());
+        return $this->successResponse('عملیات با موفقیت انجام شد', $user);
+    }
 
     /**
      * Update the specified resource in storage.

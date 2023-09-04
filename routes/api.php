@@ -130,6 +130,7 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
 // User Routes ---------------------------------------------------------------------------
 Route::middleware(['auth:sanctum', 'role:user'])->group(function () {
     // User
+    Route::get('user/get/info', [UserController::class, 'getInfo']);
     Route::resource('user', UserController::class)->only('update');
     // Comment
     Route::resource('comment', CommentController::class)->only('store', 'update');
