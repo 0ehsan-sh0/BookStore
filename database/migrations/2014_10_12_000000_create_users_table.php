@@ -16,11 +16,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('lastname')->nullable();
             $table->string('email')->unique();
-            $table->string('melicode')->unique()->nullable();
-            $table->string('birthdate')->nullable();
-            $table->enum('gender', ['male', 'female'])->nullable();
-            $table->string('state')->nullable();
-            $table->string('city')->nullable();
+            $table->string('phone')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['admin', 'user'])->default('user');

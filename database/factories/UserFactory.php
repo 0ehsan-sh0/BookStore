@@ -22,14 +22,10 @@ class UserFactory extends Factory
         return [
             'name' => Faker::firstName(),
             'lastname' => Faker::lastName(),
-            'melicode' => Faker::melliCode(),
-            'birthdate' => Faker::birthday('/'),
-            'gender' => fake()->randomElement(['male', 'female']),
-            'state' => Faker::state(),
-            'city' => Faker::city(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make(12345678), // password
+            'phone' => Faker::mobile(),
             'remember_token' => Str::random(10),
         ];
     }

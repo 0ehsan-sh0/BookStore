@@ -45,10 +45,25 @@ class UserController extends ApiController
     public function login(Request $request)
     {
         try {
+            if ($request->phone) {
+                $user = User::with('carts', 'addresses')->where('phone', $request->phone)->first();
+                if (!$user) return $this->errorResponse('تلفن یا رمز عبور اشتباه است', '', 401);
+                if (Hash::check($request->password,$user->password)) {
+                    return $this->successResponse(
+                        'ورود با موفقیت انجام شد',
+                        [
+                            'token' => $user->createToken('Api token id :' . $user->id)
+                                ->plainTextToken,
+                            'user' => $user
+                        ]
+                    );
+                }
+                else return $this->errorResponse('تلفن یا رمز عبور اشتباه است', '', 401);
+            }
             if (!Auth::attempt($request->only('email', 'password')))
                 return $this->errorResponse('ایمیل یا رمز عبور اشتباه است', '', 401);
             // Authentication passed...
-            $user = User::with('comments', 'carts', 'addresses')->where('email', $request->email)->first();
+            $user = User::with('carts', 'addresses')->where('email', $request->email)->first();
             return $this->successResponse(
                 'ورود با موفقیت انجام شد',
                 [
@@ -134,30 +149,23 @@ class UserController extends ApiController
         $user = User::with(['addresses', 'carts'])->find(Auth::id());
         return $this->successResponse('عملیات با موفقیت انجام شد', $user);
     }
-
+    
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, $user)
+    public function update(UpdateUserRequest $request)
     {
-        $user = $this->find($user);
+        $user = $this->find(Auth::id());
         if ($user->id === Auth::id()) {
             $user->name = $request->name;
             $user->lastname = $request->lastname;
             $user->email = $request->email;
-            if ($request->has('password') && $request->has('current_password')) {
+            if ($request->password && $request->current_password) {
                 if (Hash::check($request->current_password, Auth::user()->password))
                     $user->password = Hash::make($request->password);
                 else return $this->errorResponse('خطای رمز عبور', 'رمز عبور کنونی نادرست است', 401);
             }
-            $user->melicode = $request->melicode;
-            $user->birthdate = $request->birthdate;
-            $user->gender = $request->gender;
-            $user->state = $request->state;
-            $user->city = $request->city;
-            if (Auth::user()->role === 'admin')
-                $user->role = $request->role;
-
+            $user->phone = $request->phone;
             $user->save();
 
             return $this->successResponse('اطلاعات با موفقیت بروزرسانی شد', $user);
