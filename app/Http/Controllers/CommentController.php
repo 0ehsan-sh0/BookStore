@@ -43,6 +43,18 @@ class CommentController extends ApiController
     /**
      * Update the specified resource in storage.
      */
+    public function confirm($comment)
+    {
+        $comment = $this->find($comment);
+        if (!$comment) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
+        $comment->status = true;
+        $comment->save();
+        return $this->successResponse('کامنت با موفقیت تایید شد', '1');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(UpdateCommentRequest $request, $comment)
     {
         $comment = $this->find($comment);

@@ -28,11 +28,13 @@ class CommentFactory extends Factory
         } while ($id === $adminId);
         if ($isBook) return [
             'comment' => $isSentence ? Faker::sentence() : Faker::paragraph(),
+            'status' => true,
             'book_id' => Book::all()->random()->id,
             'user_id' => $id
         ];
         else return [
             'comment' => $isSentence ? Faker::sentence() : Faker::paragraph(),
+            'status' => true,
             'article_id' => Article::all()->random()->id,
             'user_id' => $id
         ];

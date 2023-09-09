@@ -65,7 +65,15 @@ class BookController extends ApiController
      */
     public function show($book)
     {
-        $book = Book::with(['categories', 'translators:id,name', 'writer:id,name', 'comments', 'tags:name,url'])
+        $book = Book::with([
+            'categories',
+            'translators:id,name',
+            'writer:id,name',
+            'comments' => function ($query) {
+                $query->where('status', true);
+            },
+            'tags:name,url'
+        ])
             ->find($book);
         if (!$book) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
         return $this->successResponse('عملیات با موفقیت انجام شد', $book);

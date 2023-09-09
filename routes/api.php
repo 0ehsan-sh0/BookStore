@@ -47,18 +47,21 @@ Route::resource('article', ArticleController::class)->only('index', 'show');
 
 // Authenticated Routes ---------------------------------------------------------------------------
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('logout', [UserController::class, 'logout']);
+    // Comment
     Route::resource('comment', CommentController::class)->only('destroy');
+    // User
+    Route::post('logout', [UserController::class, 'logout']);
     Route::resource('user', UserController::class)->only('destroy');
+    Route::get('user/get/info', [UserController::class, 'getInfo']);
 });
 // --------------------------------------------------------------------------- Authenticated Routes
-
 
 // Admin Routes ---------------------------------------------------------------------------
 Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     // Comment Routes -------------------
     Route::get('comment/trashed', [CommentController::class, 'trashed']);
     Route::post('comment/restore/{comment}', [CommentController::class, 'restoreData'])->withTrashed();
+    Route::post('comment/confirm/{comment}', [CommentController::class, 'confirm']);
     Route::resource('comment', CommentController::class)->only('index');
     // ------------------- Comment Routes
 
@@ -130,8 +133,7 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
 // User Routes ---------------------------------------------------------------------------
 Route::middleware(['auth:sanctum', 'role:user'])->group(function () {
     // User
-    Route::get('user/get/info', [UserController::class, 'getInfo']);
-    Route::resource('user', UserController::class)->only('update');
+    Route::put('user', [UserController::class, 'update']);
     // Comment
     Route::resource('comment', CommentController::class)->only('store', 'update');
     // Cart

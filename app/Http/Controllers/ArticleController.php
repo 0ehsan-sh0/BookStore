@@ -57,7 +57,13 @@ class ArticleController extends ApiController
      */
     public function show($article)
     {
-        $article = Article::with(['comments', 'tags', 'user:id,name,lastname'])
+        $article = Article::with([
+            'comments' => function ($query) {
+                $query->where('status', true);
+            },
+            'tags',
+            'user:id,name,lastname'
+        ])
             ->find($article);
         if (!$article) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
         return $this->successResponse('عملیات با موفقیت انجام شد', $article);
