@@ -394,6 +394,11 @@
 											"key": "password",
 											"value": "admin123",
 											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "",
+											"type": "text"
 										}
 									]
 								},
@@ -1537,6 +1542,16 @@
 						{
 							"name": "User-Update",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "1|bavHfJ74Vn0feRnSzSHJraNNzWWCUEv4mRYimr0j",
+											"type": "string"
+										}
+									]
+								},
 								"method": "PUT",
 								"header": [
 									{
@@ -1570,6 +1585,11 @@
 											"type": "text"
 										},
 										{
+											"key": "phone",
+											"value": "",
+											"type": "text"
+										},
+										{
 											"key": "current_password",
 											"value": "",
 											"description": "Nullable",
@@ -1586,47 +1606,16 @@
 											"value": "",
 											"description": "Nullable",
 											"type": "text"
-										},
-										{
-											"key": "melicode",
-											"value": "",
-											"type": "text"
-										},
-										{
-											"key": "birthdate",
-											"value": "",
-											"type": "text"
-										},
-										{
-											"key": "gender",
-											"value": "",
-											"type": "text"
-										},
-										{
-											"key": "state",
-											"value": "",
-											"type": "text"
-										},
-										{
-											"key": "city",
-											"value": "",
-											"type": "text"
-										},
-										{
-											"key": "role",
-											"value": "",
-											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "{{LocalHostApi}}/user/1",
+									"raw": "{{LocalHostApi}}/user",
 									"host": [
 										"{{LocalHostApi}}"
 									],
 									"path": [
-										"user",
-										"1"
+										"user"
 									]
 								}
 							},
@@ -1730,6 +1719,46 @@
 									"body": ""
 								}
 							]
+						},
+						{
+							"name": "User-info",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "1|C6VCkJN9RIaacWQPflw6gubzeJk0DZJ4VnJ5qWWV",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/user/get/info",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"user",
+										"get",
+										"info"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -2209,6 +2238,36 @@
 									"path": [
 										"comment",
 										"restore",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Comment-Confirm",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{LocalHostApi}}/comment/confirm/1",
+									"host": [
+										"{{LocalHostApi}}"
+									],
+									"path": [
+										"comment",
+										"confirm",
 										"1"
 									]
 								}
