@@ -59,7 +59,7 @@ class ArticleController extends ApiController
     {
         $article = Article::with([
             'comments' => function ($query) {
-                $query->where('status', true);
+                $query->with('user:id,name,lastname')->where('status', true);
             },
             'tags',
             'user:id,name,lastname'
