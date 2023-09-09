@@ -70,7 +70,7 @@ class BookController extends ApiController
             'translators:id,name',
             'writer:id,name',
             'comments' => function ($query) {
-                $query->with('user:id,name,lastname')->where('status', true);
+                $query->with('user:id,name,lastname,role')->where('status', true);
             },
             'tags:name,url'
         ])
