@@ -48,7 +48,7 @@ Route::resource('article', ArticleController::class)->only('index', 'show');
 // Authenticated Routes ---------------------------------------------------------------------------
 Route::middleware('auth:sanctum')->group(function () {
     // Comment
-    Route::resource('comment', CommentController::class)->only('destroy');
+    Route::resource('comment', CommentController::class)->only('destroy','store','update');
     // User
     Route::post('logout', [UserController::class, 'logout']);
     Route::resource('user', UserController::class)->only('destroy');
@@ -134,8 +134,6 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
 Route::middleware(['auth:sanctum', 'role:user'])->group(function () {
     // User
     Route::put('user', [UserController::class, 'update']);
-    // Comment
-    Route::resource('comment', CommentController::class)->only('store', 'update');
     // Cart
     Route::resource('cart', CartController::class)->only('store', 'update', 'show');
     // Address
