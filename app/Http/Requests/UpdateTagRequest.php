@@ -26,7 +26,7 @@ class UpdateTagRequest extends FormRequest
     public function rules(): array
     {
         $tag = Tag::find($this->route('tag'));
-        if (!$tag) return ['tag' => 'required|exists:main_categories,id'];
+        if (!$tag) return ['tag' => 'required|exists:tags,id'];
         return [
             'url' => 'required|regex:/^[a-zA-Z0-9-]+$/|unique:main_categories,url,'. $tag->id,
             'name' => 'required'

@@ -26,7 +26,7 @@ class UpdateWriterRequest extends FormRequest
     public function rules(): array
     {
         $writer = Writer::find($this->route('writer'));
-        if (!$writer) return ['writer' => 'required|exists:main_categories,id'];
+        if (!$writer) return ['writer' => 'required|exists:writers,id'];
         return [
             'name' => 'required|unique:writers,name,' . $writer->id,
             'photo' => 'mimes:jpg,jpeg,png|max:2048'
