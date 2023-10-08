@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('format'); // قطع
             $table->string('pages');
             $table->string('publish_year');
+            $table->string('publisher');
             $table->string('count');
 
             $table->foreignId('writer_id')->constrained('writers')->OnDelete('cascade');
