@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Cart;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreCartRequest;
-use App\Http\Requests\UpdateCartRequest;
-use Illuminate\Support\Facades\Validator;
 
 class CartController extends ApiController
 {
@@ -53,14 +50,14 @@ class CartController extends ApiController
      */
     public function store(StoreCartRequest $request)
     {
+        if (!$request->ischeckedout) return $this->errorResponse('لطفا قبل از ثبت سفارش پرداخت نهایی را انجام دهید', null);
         do $code = random_int(100000000, 999999999);
         while (Cart::where('code', $code)->count() > 0);
-        $request->ischeckedout ? $checkedout_time = Carbon::now() : $checkedout_time = null;
         $cart = [
             'code' => $code,
-            'ischeckedout' => $request->ischeckedout,
-            'checkedout_time' => $checkedout_time,
+            'ischeckedout_at' => Carbon::now(),
             'total_price' => 0,
+            'address_id' => $request->address_id,
             'user_id' => Auth::id()
         ];
         $cart_created = Cart::create($cart);
@@ -71,8 +68,7 @@ class CartController extends ApiController
         foreach ($books as $index => $book) {
             $cart_created->books()->attach($book, ['count' => $counts[$index]]);
         }
-        $totalPrice = $this->countTotalPrice($cart_created);
-        $cart_created->total_price = $totalPrice;
+        $cart_created->total_price = $this->countTotalPrice($cart_created);
         $cart_created->save();
         return $this->successResponse('سبد خرید با موفقیت افزوده شد', '1');
     }
@@ -88,41 +84,6 @@ class CartController extends ApiController
         if (Auth::id() !== $cart->user_id)
             return $this->errorResponse('خطای سطح دسترسی', '', 401);
         return $this->successResponse('عملیات با موفقیت انجام شد', $cart);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCartRequest $request, $cart)
-    {
-        $cart = $this->find($cart);
-        if (!$cart) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
-        if ($cart->ischeckedout) {
-            return $this->errorResponse('لطفا خطاهای زیر را بررسی کنید', 'نمیتوانید اطلاعات سبد خریدی را که پرداخت آن نهایی شده است تغییر دهید');
-        }
-        $request->ischeckedout ? $checkedout_time = Carbon::now() : $checkedout_time = null;
-        $cart_update = [
-            'ischeckedout' => $request->ischeckedout,
-            'checkedout_time' => $checkedout_time,
-            'total_price' => 0,
-            'user_id' => $request->user_id
-        ];
-        $cart->update($cart_update);
-
-        // Sync each book
-        $books = $request->input('books', []);
-        $counts = $request->input('counts', []);
-        $cart->books()->sync($books);
-
-        // Update count for each book in the pivot table
-        foreach ($books as $index => $book) {
-            $count = $counts[$index];
-            $cart->books()->updateExistingPivot($book, ['count' => $count]);
-        }
-        $totalPrice = $this->countTotalPrice($cart);
-        $cart->total_price = $totalPrice;
-        $cart->save();
-        return $this->successResponse('سبد خرید با موفقیت بروزرسانی شد', '1');
     }
 
     public function restoreData($cart)

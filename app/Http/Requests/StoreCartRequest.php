@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreCartRequest extends FormRequest
 {
@@ -24,12 +25,19 @@ class StoreCartRequest extends FormRequest
      */
     public function rules(): array
     {
+        $userId = $this->user()->id;
         return [
             'ischeckedout' => 'boolean|required',
             'books' => 'required|array',
             'books.*' => 'exists:books,id',
             'counts' => 'required|array',
             'counts.*' => 'integer|min:1',
+            'address_id' => [
+                'required',
+                Rule::exists('addresses', 'id')->where(function ($query) use ($userId) {
+                    $query->where('user_id', $userId);
+                }),
+            ]
         ];
     }
 
@@ -59,7 +67,9 @@ class StoreCartRequest extends FormRequest
             'books.*.exists' => 'کتاب مورد نظر یافت نشد',
             'counts.required' => 'تعداد هر کتاب الزامی است',
             'counts.*.integer' => 'لطفا تعداد را درست وارد کنید',
-            'counts.*.min' => 'حداقل تعداد خریداری شده از هر کتاب باید یک عدد باشد'
+            'counts.*.min' => 'حداقل تعداد خریداری شده از هر کتاب باید یک عدد باشد',
+            'address_id.required' => 'لطفا آدرس مورد نظر را وادر نمایید',
+            'address_id.exists' => 'آدرس مورد نظر یافت نشد'
         ];
     }
 }

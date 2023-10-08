@@ -11,8 +11,8 @@ class Cart extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
-        'code', 'total_price', 'ischeckedout',
-        'checkedout_time', 'user_id'
+        'code', 'total_price', 'ischeckedout_at',
+        'checkedout_time', 'user_id', 'address_id'
     ];
 
     // ---------------------------------------------------------------- Relationships

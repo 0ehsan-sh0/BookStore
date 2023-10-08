@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->unsignedBigInteger('total_price');
-            $table->boolean('ischeckedout');
-            $table->dateTime('checkedout_time')->nullable();
-
+            $table->dateTime('ischeckedout_at');
+            
+            $table->foreignId('address_id')->constrained('addresses')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->OnDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
