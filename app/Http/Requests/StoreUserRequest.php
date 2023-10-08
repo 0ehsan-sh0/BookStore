@@ -24,12 +24,18 @@ class StoreUserRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'name' => 'required',
             'lastname' => 'required',
-            'email' => 'required|email|unique:users',
             'password' => 'required|min:8|confirmed',
         ];
+        $hasEmail = $this->email;
+        $hasPhone = $this->phone;
+        if ($hasEmail) {
+            $rules['email'] = 'required|email|unique:users';
+            $this->phone = null;
+        } else if ($hasPhone) $rules['phone'] = 'digits:11|unique:users,phone';
+        return $rules; 
     }
 
     /**
@@ -59,7 +65,10 @@ class StoreUserRequest extends FormRequest
             'email.email' => 'لطفا ایمیل را صحیح وارد کنید',
             'password.required' => 'فیلد رمز عبور الزامی است',
             'password.confirmed' => 'رمز عبور با تکرار آن مطابقت ندارد',
-            'password.min' => 'رمز عبور باید حداقل 8 کاراکتر باشد'
+            'password.min' => 'رمز عبور باید حداقل 8 کاراکتر باشد',
+            'empty.required' => 'خطا',
+            'phone.digits' => 'شماره تلفن را در  فرمت درست وارد نمایید',
+            'phone.unique' => 'شماره تلفن مورد نظر در سایت ثبت شده است'
         ];
     }
 }

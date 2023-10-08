@@ -23,12 +23,15 @@ class UserController extends ApiController
     public function register(StoreUserRequest $request)
     {
         try {
-            $user = User::create([
+            $fields = [
                 'name' => $request->name,
                 'lastname' => $request->lastname,
-                'email' => $request->email,
                 'password' => Hash::make($request->password),
-            ]);
+            ];
+            if ($request->email) $fields['email'] = $request->email;
+            else if ($request->phone) $fields['phone'] = $request->phone;
+            else return $this->errorResponse('لطفا شماره موبایل یا ایمیل را وارد کنید', null);
+            $user = User::create($fields);
             return $this->successResponse(
                 'ثبت نام با موفقیت انجام شد',
                 [
@@ -38,7 +41,7 @@ class UserController extends ApiController
                 ]
             );
         } catch (\Throwable $th) {
-            return $this->errorResponse('خطا از سمت سرور', '', 500);
+            return $this->errorResponse('خطا از سمت سرور', null, 500);
         }
     }
 
@@ -48,7 +51,7 @@ class UserController extends ApiController
             if ($request->phone) {
                 $user = User::with('carts', 'addresses')->where('phone', $request->phone)->first();
                 if (!$user) return $this->errorResponse('تلفن یا رمز عبور اشتباه است', '', 401);
-                if (Hash::check($request->password,$user->password)) {
+                if (Hash::check($request->password, $user->password)) {
                     return $this->successResponse(
                         'ورود با موفقیت انجام شد',
                         [
@@ -57,8 +60,7 @@ class UserController extends ApiController
                             'user' => $user
                         ]
                     );
-                }
-                else return $this->errorResponse('تلفن یا رمز عبور اشتباه است', '', 401);
+                } else return $this->errorResponse('تلفن یا رمز عبور اشتباه است', '', 401);
             }
             if (!Auth::attempt($request->only('email', 'password')))
                 return $this->errorResponse('ایمیل یا رمز عبور اشتباه است', '', 401);
@@ -145,11 +147,12 @@ class UserController extends ApiController
     /**
      * Get the Auth user information including carts and addresses.
      */
-    public function getInfo(){
+    public function getInfo()
+    {
         $user = User::with(['addresses', 'carts'])->find(Auth::id());
         return $this->successResponse('عملیات با موفقیت انجام شد', $user);
     }
-    
+
     /**
      * Update the specified resource in storage.
      */
