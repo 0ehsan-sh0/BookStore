@@ -43,6 +43,7 @@ class BookFactory extends Factory
             'format' => Faker::word(),
             'pages' => random_int(20, 350),
             'publish_year' => random_int(1370,1400),
+            'publisher' => Faker::word(),
             'count' => random_int(50,1000),
             'writer_id' => Writer::all()->random()->id
         ];

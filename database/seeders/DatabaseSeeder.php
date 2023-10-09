@@ -10,13 +10,23 @@ use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
+    public function countTotalPrice($cart)
+    {
+        $totalPrice = 0;
+        foreach ($cart->books as $book) {
+            $totalPrice += $book->price * $book->pivot->count;
+        }
+        return $totalPrice;
+    }
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
+        
         \App\Models\User::factory(60)->create();
         \App\Models\Address::factory(100)->create();
+        $carts = \App\Models\Cart::factory(300)->create();
         MainCategory::factory()->psychology()->create();
         MainCategory::factory()->philosophical()->create();
         MainCategory::factory()->shortStory()->create();
@@ -74,6 +84,15 @@ class DatabaseSeeder extends Seeder
             $article->tags()->attach(
                 $tags->random(rand(1, 5))->pluck('id')->toArray()
             );
+        }
+        // attach books to carts and calculate the total price
+        foreach ($carts as $cart) {
+            $random_books = $books->random(rand(1, 4))->pluck('id')->toArray();
+            foreach ($random_books as $book) {
+                $cart->books()->attach($book, ['count' => random_int(1,3)]);
+            }
+            $cart->total_price = $this->countTotalPrice($cart);
+            $cart->save();
         }
     }
 }
