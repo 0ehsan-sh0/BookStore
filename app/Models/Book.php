@@ -30,6 +30,11 @@ class Book extends Model
         return $this->belongsToMany(Translator::class, 'book_translator');
     }
 
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'book_user');
+    }
+
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'book_category');

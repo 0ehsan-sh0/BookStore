@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        \App\Models\User::factory(60)->create();
+        $users = \App\Models\User::factory(60)->create();
         \App\Models\Address::factory(100)->create();
         $carts = \App\Models\Cart::factory(300)->create();
         MainCategory::factory()->psychology()->create();
@@ -67,6 +67,7 @@ class DatabaseSeeder extends Seeder
             }
             $book->tags()->attach($tags->random(rand(1, 5))->pluck('id')->toArray());
             $book->categories()->attach($categories->random(rand(1, 3))->pluck('id')->toArray());
+            $book->users()->attach($users->random(rand(1, 5))->pluck('id')->toArray());
         }
         // Attach random tags to the articles
         foreach ($articles as $article) {

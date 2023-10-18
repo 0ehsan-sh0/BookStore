@@ -48,7 +48,7 @@ class UserController extends ApiController
     {
         try {
             if ($request->phone) {
-                $user = User::with('carts', 'addresses')->where('phone', $request->phone)->first();
+                $user = User::with('carts', 'addresses', 'books')->where('phone', $request->phone)->first();
                 if (! $user) {
                     return $this->errorResponse('تلفن یا رمز عبور اشتباه است', '', 401);
                 }
@@ -69,7 +69,7 @@ class UserController extends ApiController
                 return $this->errorResponse('ایمیل یا رمز عبور اشتباه است', '', 401);
             }
             // Authentication passed...
-            $user = User::with('carts', 'addresses')->where('email', $request->email)->first();
+            $user = User::with('carts', 'addresses', 'books')->where('email', $request->email)->first();
 
             return $this->successResponse(
                 'ورود با موفقیت انجام شد',
@@ -159,7 +159,7 @@ class UserController extends ApiController
      */
     public function getInfo()
     {
-        $user = User::with(['addresses', 'carts'])->find(Auth::id());
+        $user = User::with(['addresses', 'carts', 'books'])->find(Auth::id());
 
         return $this->successResponse('عملیات با موفقیت انجام شد', $user);
     }
