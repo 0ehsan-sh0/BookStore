@@ -27,14 +27,13 @@ class StoreCategoryRequest extends FormRequest
         return [
             'url' => 'required|unique:categories|regex:/^[a-zA-Z0-9-]+$/',
             'name' => 'required',
-            'main_category_id' => 'required|exists:main_categories,id' // Add validation rule for main_category_id
+            'main_category_id' => 'required|exists:main_categories,id', // Add validation rule for main_category_id
         ];
     }
 
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
@@ -55,7 +54,7 @@ class StoreCategoryRequest extends FormRequest
             'name.required' => 'نام دسته بندی الزامی است',
             'url.regex' => 'لطفا مسیر معتبر وارد کنید',
             'main_category_id.required' => 'دسته بندی اصلی الزامی است', // Add custom error message for main_category_id
-            'main_category_id.exists' => 'دسته بندی اصلی معتبر نیست' // Add custom error message for main_category_id
+            'main_category_id.exists' => 'دسته بندی اصلی معتبر نیست', // Add custom error message for main_category_id
         ];
     }
 }

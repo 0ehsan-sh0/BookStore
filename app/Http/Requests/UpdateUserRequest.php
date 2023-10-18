@@ -26,20 +26,20 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         $user = auth()->user();
+
         return [
             'name' => 'required',
             'lastname' => 'required',
-            'email' => 'required|email|unique:users,email,' . $user->id,
+            'email' => 'required|email|unique:users,email,'.$user->id,
             'current_password' => 'nullable|min:8',
             'password' => 'nullable|min:8|confirmed',
-            'phone' => 'digits:11|unique:users,phone,'. $user->id
+            'phone' => 'digits:11|unique:users,phone,'.$user->id,
         ];
     }
 
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
@@ -65,7 +65,7 @@ class UpdateUserRequest extends FormRequest
             'password.min' => 'رمز عبور باید حداقل 8 کاراکتر باشد',
             'current_password.min' => 'رمز عبور باید حداقل 8 کاراکتر باشد',
             'phone.unique' => 'شماره تلفن قبلا در سایت ثبت شده است',
-            'phone.digits' => 'لطفا شماره تلفن معتبر وارد کنید'
+            'phone.digits' => 'لطفا شماره تلفن معتبر وارد کنید',
         ];
     }
 }

@@ -25,32 +25,31 @@ class StoreBookRequest extends FormRequest
     public function rules(): array
     {
         return [
-                'name' => 'required',
-                'english_name' => 'nullable|regex:/^[a-zA-Z0-9 ]+$/',
-                'description' => 'required',
-                'price' => 'required|numeric|min:0',
-                'photo' => 'required|mimes:jpg,jpeg,png|max:3072',
-                'print_series' => 'required|numeric|min:0|max:65533',
-                'isbn' => 'required|unique:books',
-                'format' => 'required',
-                'pages' => 'required|numeric|min:1',
-                'publish_year' => 'required|numeric|min:1000',
-                'publisher' => 'required|string|max:255',
-                'count' => 'required|numeric|min:0',
-                'writer_id' => 'required|exists:writers,id',
-                'categories' => 'required|array',
-                'categories.*' => 'exists:categories,id',
-                'translators' => 'required|array',
-                'translators.*' => 'exists:translators,id',
-                'tags' => 'required|array',
-                'tags.*' => 'exists:tags,id'
+            'name' => 'required',
+            'english_name' => 'nullable|regex:/^[a-zA-Z0-9 ]+$/',
+            'description' => 'required',
+            'price' => 'required|numeric|min:0',
+            'photo' => 'required|mimes:jpg,jpeg,png|max:3072',
+            'print_series' => 'required|numeric|min:0|max:65533',
+            'isbn' => 'required|unique:books',
+            'format' => 'required',
+            'pages' => 'required|numeric|min:1',
+            'publish_year' => 'required|numeric|min:1000',
+            'publisher' => 'required|string|max:255',
+            'count' => 'required|numeric|min:0',
+            'writer_id' => 'required|exists:writers,id',
+            'categories' => 'required|array',
+            'categories.*' => 'exists:categories,id',
+            'translators' => 'required|array',
+            'translators.*' => 'exists:translators,id',
+            'tags' => 'required|array',
+            'tags.*' => 'exists:tags,id',
         ];
     }
 
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
@@ -101,7 +100,7 @@ class StoreBookRequest extends FormRequest
             'translators.required' => 'حداقل یک مترجم الزامی است',
             'translators.*.exists' => 'مترجم مورد نظر یافت نشد',
             'tags.required' => 'حداقل یک تگ الزامی است',
-            'tags.*.exists' => 'تگ مورد نظر یافت نشد'
+            'tags.*.exists' => 'تگ مورد نظر یافت نشد',
         ];
     }
 }

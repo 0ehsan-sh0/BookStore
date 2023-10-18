@@ -7,16 +7,9 @@ use App\Http\Requests\UpdateTagRequest;
 use App\Models\Article;
 use App\Models\Book;
 use App\Models\Tag;
-use Illuminate\Http\Request;
 
 class TagController extends ApiController
 {
-    public function find($id)
-    {
-        $object = Tag::find($id);
-        if ($object) return $object;
-        else false;
-    }
     /**
      * Display a listing of the resource.
      */
@@ -36,6 +29,7 @@ class TagController extends ApiController
     public function store(StoreTagRequest $request)
     {
         Tag::create($request->all());
+
         return $this->successResponse('تگ با موفقیت افزوده شد', '1');
     }
 
@@ -45,46 +39,46 @@ class TagController extends ApiController
     public function tagBooksAndArticles($tag)
     {
         $tag = Tag::where('url', $tag)->first();
-        if (!$tag) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
+        if (! $tag) {
+            return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
+        }
         $books = Book::with(['categories', 'translators:id,name', 'writer:id,name'])
-        ->whereHas('tags', function($query) use ($tag) {
-            return $query->where('url', $tag->url);
-        })->latest()->paginate(20);
-        $article = Article::select('id', 'title','subtitle', 'user_id', 'created_at', 'updated_at')
-        ->with(['user:id,name,lastname'])
-        ->whereHas('tags', function($query) use ($tag) {
-            return $query->where('url', $tag->url);
-        })->latest()->paginate(10);
-        return $this->successResponse('عملیات با موفقیت انجام شد', ['books' => $books,'articles' => $article]);
+            ->whereHas('tags', function ($query) use ($tag) {
+                return $query->where('url', $tag->url);
+            })->latest()->paginate(20);
+        $article = Article::select('id', 'title', 'subtitle', 'user_id', 'created_at', 'updated_at')
+            ->with(['user:id,name,lastname'])
+            ->whereHas('tags', function ($query) use ($tag) {
+                return $query->where('url', $tag->url);
+            })->latest()->paginate(10);
+
+        return $this->successResponse('عملیات با موفقیت انجام شد', ['books' => $books, 'articles' => $article]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTagRequest $request, $tag)
+    public function update(UpdateTagRequest $request, Tag $tag)
     {
-        $tag = $this->find($tag);
-        $tag->update($request->all());
+        $tag->update($request->validated());
+
         return $this->successResponse('تگ با موفقیت بروزرسانی شد', '1');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($tag)
+    public function destroy(Tag $tag)
     {
-        $tag = $this->find($tag);
-        if (!$tag) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
         $tag->delete();
+
         return $this->successResponse('تگ با موفقیت حذف شد', '1');
     }
 
-    public function restoreData($tag)
+    public function restoreData(Tag $tag)
     {
-        $tag = Tag::onlyTrashed()->find($tag);
-        if ($tag) {
-            $tag->restore();
-            return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
-        } else return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
+        $tag->restore();
+
+        return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
     }
 }

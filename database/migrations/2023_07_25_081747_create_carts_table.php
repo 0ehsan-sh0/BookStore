@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->unsignedBigInteger('total_price');
             $table->dateTime('ischeckedout_at');
-            
+
             $table->foreignId('address_id')->constrained('addresses')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->OnDelete('cascade');
             $table->softDeletes();

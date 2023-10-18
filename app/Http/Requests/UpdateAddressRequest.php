@@ -2,11 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Address;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
 
 class UpdateAddressRequest extends FormRequest
 {
@@ -25,24 +24,23 @@ class UpdateAddressRequest extends FormRequest
      */
     public function rules(): array
     {
-        $address = Address::find($this->route('address'));
-        if (!$address) return ['address' => 'required|exists:addresses,id'];
+        $addressID = $this->route('address')->id;
+
         return [
             'name' => 'required',
             'lastname' => 'required',
-            'phone' => 'required|numeric|unique:addresses,phone,' . $address->id,
+            'phone' => 'required|numeric|unique:addresses,phone,'.$addressID,
             'city' => 'required',
             'state' => 'required',
-            'place_number' => 'required|numeric|unique:addresses,place_number,'. $address->id,
-            'post_code' => 'required|numeric|unique:addresses,post_code,'. $address->id,
-            'address' => 'required'
+            'place_number' => 'required|numeric|unique:addresses,place_number,'.$addressID,
+            'post_code' => 'required|numeric|unique:addresses,post_code,'.$addressID,
+            'address' => 'required',
         ];
     }
 
-     /**
+    /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
@@ -73,7 +71,7 @@ class UpdateAddressRequest extends FormRequest
             'post_code.unique' => 'کد پستی تکراری است',
             'post_code.numeric' => 'کد پستی باید عددی باشد',
             'address.required' => 'آدرس الزامی است',
-            'address.exists' => 'مسیر مورد نظر معتبر نیست'
+            'address.exists' => 'مسیر مورد نظر معتبر نیست',
         ];
     }
 }

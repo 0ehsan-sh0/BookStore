@@ -21,6 +21,7 @@ class Role
                 'message' => 'شما دسترسی به این بخش را ندارید',
             ], 401);
         }
+
         return $next($request);
     }
 }

@@ -34,14 +34,16 @@ class StoreUserRequest extends FormRequest
         if ($hasEmail) {
             $rules['email'] = 'required|email|unique:users';
             $this->phone = null;
-        } else if ($hasPhone) $rules['phone'] = 'digits:11|unique:users,phone';
-        return $rules; 
+        } elseif ($hasPhone) {
+            $rules['phone'] = 'digits:11|unique:users,phone';
+        }
+
+        return $rules;
     }
 
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
@@ -68,7 +70,7 @@ class StoreUserRequest extends FormRequest
             'password.min' => 'رمز عبور باید حداقل 8 کاراکتر باشد',
             'empty.required' => 'خطا',
             'phone.digits' => 'شماره تلفن را در  فرمت درست وارد نمایید',
-            'phone.unique' => 'شماره تلفن مورد نظر در سایت ثبت شده است'
+            'phone.unique' => 'شماره تلفن مورد نظر در سایت ثبت شده است',
         ];
     }
 }

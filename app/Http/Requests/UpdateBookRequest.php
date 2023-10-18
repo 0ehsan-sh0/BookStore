@@ -2,12 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Book;
-use Illuminate\Validation\Rule;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\Rule;
 
 class UpdateBookRequest extends FormRequest
 {
@@ -21,13 +20,9 @@ class UpdateBookRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
     public function rules(): array
     {
-        $book = Book::find($this->route('book'));
-        if (!$book) return ['book' => 'required|exists:books,id'];
         return [
             'name' => 'required',
             'english_name' => 'nullable|regex:/^[a-zA-Z0-9 ]+$/',
@@ -37,7 +32,7 @@ class UpdateBookRequest extends FormRequest
             'print_series' => 'required|numeric|min:0|max:65533',
             'isbn' => [
                 'required',
-                Rule::unique('books', 'isbn')->ignore($book->id),
+                Rule::unique('books', 'isbn')->ignore($this->route('book')->id),
             ],
             'format' => 'required',
             'pages' => 'required|numeric|min:1',
@@ -50,14 +45,13 @@ class UpdateBookRequest extends FormRequest
             'translators' => 'required|array',
             'translators.*' => 'exists:translators,id',
             'tags' => 'required|array',
-            'tags.*' => 'exists:tags,id'
+            'tags.*' => 'exists:tags,id',
         ];
     }
 
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
@@ -108,7 +102,7 @@ class UpdateBookRequest extends FormRequest
             'translators.*.exists' => 'مترجم مورد نظر یافت نشد',
             'tags.required' => 'حداقل یک تگ الزامی است',
             'tags.*.exists' => 'تگ مورد نظر یافت نشد',
-            'book.exists' => 'مسیر مورد نظر معتبر نیست'
+            'book.exists' => 'مسیر مورد نظر معتبر نیست',
         ];
     }
 }

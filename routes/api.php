@@ -1,17 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TagController;
-use App\Http\Controllers\BookController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\WriterController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\CommentController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\TranslatorController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MainCategoryController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\TranslatorController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\WriterController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,11 +44,10 @@ Route::post('login', [UserController::class, 'login']);
 Route::resource('article', ArticleController::class)->only('index', 'show');
 // --------------------------------------------------------------------------- Public Routes
 
-
 // Authenticated Routes ---------------------------------------------------------------------------
 Route::middleware('auth:sanctum')->group(function () {
     // Comment
-    Route::resource('comment', CommentController::class)->only('destroy','store','update');
+    Route::resource('comment', CommentController::class)->only('destroy', 'store', 'update');
     // User
     Route::post('logout', [UserController::class, 'logout']);
     Route::resource('user', UserController::class)->only('destroy');
@@ -105,7 +104,6 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
 
     // Cart Routes -------------------
     Route::get('cart/trashed', [CartController::class, 'trashed']);
-    Route::post('cart/restore/{cart}', [CartController::class, 'restoreData'])->withTrashed();
     Route::resource('cart', CartController::class)->only('index');
     // ------------------- Cart Routes
 
@@ -128,7 +126,6 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     // ------------------- Article Routes
 });
 // --------------------------------------------------------------------------- Admin Routes
-
 
 // User Routes ---------------------------------------------------------------------------
 Route::middleware(['auth:sanctum', 'role:user'])->group(function () {

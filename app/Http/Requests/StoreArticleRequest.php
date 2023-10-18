@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 
@@ -30,14 +30,13 @@ class StoreArticleRequest extends FormRequest
             'description' => 'required',
             'photo' => 'nullable|mimes:jpg,jpeg,png|max:3072',
             'tags' => 'required|array',
-            'tags.*' => 'exists:tags,id'
+            'tags.*' => 'exists:tags,id',
         ];
     }
 
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
@@ -60,7 +59,7 @@ class StoreArticleRequest extends FormRequest
             'photo.mimes' => 'لطفا فایل با فرمت عکس وارد کنید',
             'photo.max' => 'حجم فایل نباید بیشتر از سه مگابایت باشد',
             'tags.required' => 'حداقل یک تگ الزامی است',
-            'tags.*.exists' => 'تگ مورد نظر یافت نشد'
+            'tags.*.exists' => 'تگ مورد نظر یافت نشد',
         ];
     }
 }

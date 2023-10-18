@@ -32,7 +32,6 @@ class UpdateCommentRequest extends FormRequest
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
@@ -49,7 +48,7 @@ class UpdateCommentRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'comment.required' => 'لطفا نظرت رو بنویس'
+            'comment.required' => 'لطفا نظرت رو بنویس',
         ];
     }
 }

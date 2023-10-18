@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Validation\Rule;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\Rule;
 
 class StoreCartRequest extends FormRequest
 {
@@ -26,6 +26,7 @@ class StoreCartRequest extends FormRequest
     public function rules(): array
     {
         $userId = $this->user()->id;
+
         return [
             'ischeckedout' => 'boolean|required',
             'books' => 'required|array',
@@ -37,14 +38,13 @@ class StoreCartRequest extends FormRequest
                 Rule::exists('addresses', 'id')->where(function ($query) use ($userId) {
                     $query->where('user_id', $userId);
                 }),
-            ]
+            ],
         ];
     }
 
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
@@ -69,7 +69,7 @@ class StoreCartRequest extends FormRequest
             'counts.*.integer' => 'لطفا تعداد را درست وارد کنید',
             'counts.*.min' => 'حداقل تعداد خریداری شده از هر کتاب باید یک عدد باشد',
             'address_id.required' => 'لطفا آدرس مورد نظر را وادر نمایید',
-            'address_id.exists' => 'آدرس مورد نظر یافت نشد'
+            'address_id.exists' => 'آدرس مورد نظر یافت نشد',
         ];
     }
 }

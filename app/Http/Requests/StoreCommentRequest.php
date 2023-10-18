@@ -7,7 +7,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 
-
 class StoreCommentRequest extends FormRequest
 {
     /**
@@ -33,15 +32,18 @@ class StoreCommentRequest extends FormRequest
         if ($hasBook) {
             $rules['book_id'] = 'required|exists:books,id';
             $this->article_id = null;
-        } else if ($hasArticle) $rules['article_id'] = 'required|exists:articles,id';
-        else $rules['empty'] = 'required';
+        } elseif ($hasArticle) {
+            $rules['article_id'] = 'required|exists:articles,id';
+        } else {
+            $rules['empty'] = 'required';
+        }
+
         return $rules;
     }
 
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
@@ -63,7 +65,7 @@ class StoreCommentRequest extends FormRequest
             'book_id.exists' => 'کتاب مورد نظر یافت نشد',
             'article_id.required' => 'مقاله ای که میخوای براش نظر بدی رو انتخاب کن',
             'article_id.exists' => 'مقاله مورد نظر یافت نشد',
-            'empty.required' => 'خطا'
+            'empty.required' => 'خطا',
         ];
     }
 }

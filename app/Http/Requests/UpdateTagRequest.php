@@ -2,11 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Tag;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
 
 class UpdateTagRequest extends FormRequest
 {
@@ -25,18 +24,17 @@ class UpdateTagRequest extends FormRequest
      */
     public function rules(): array
     {
-        $tag = Tag::find($this->route('tag'));
-        if (!$tag) return ['tag' => 'required|exists:tags,id'];
+        $tagID = $this->route('tag')->id;
+
         return [
-            'url' => 'required|regex:/^[a-zA-Z0-9-]+$/|unique:main_categories,url,'. $tag->id,
-            'name' => 'required'
+            'url' => 'required|regex:/^[a-zA-Z0-9-]+$/|unique:main_categories,url,'.$tagID,
+            'name' => 'required',
         ];
     }
 
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)

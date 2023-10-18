@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use Ybazli\Faker\Facades\Faker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,81 +18,71 @@ class MainCategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'url' => $this->faker->word()
+            'url' => $this->faker->word(),
         ];
     }
 
     /**
      * Specify the exact data for the 'روانشناسی' category.
-     *
-     * @return \Database\Factories\MainCategoryFactory
      */
     public function psychology(): MainCategoryFactory
     {
         return $this->state(function (array $attributes) {
             return [
                 'name' => 'روانشناسی',
-                'url' => 'psychology'
+                'url' => 'psychology',
             ];
         });
     }
 
     /**
      * Specify the exact data for the 'فلسفی' category.
-     *
-     * @return \Database\Factories\MainCategoryFactory
      */
     public function philosophical(): MainCategoryFactory
     {
         return $this->state(function (array $attributes) {
             return [
                 'name' => 'فلسفی',
-                'url' => 'philosophical'
+                'url' => 'philosophical',
             ];
         });
     }
 
     /**
      * Specify the exact data for the 'داستان کوتاه' category.
-     *
-     * @return \Database\Factories\MainCategoryFactory
      */
     public function shortStory(): MainCategoryFactory
     {
         return $this->state(function (array $attributes) {
             return [
                 'name' => 'داستان کوتاه',
-                'url' => 'short-story'
+                'url' => 'short-story',
             ];
         });
     }
 
     /**
      * Specify the exact data for the 'سیاسی' category.
-     *
-     * @return \Database\Factories\MainCategoryFactory
      */
     public function political(): MainCategoryFactory
     {
         return $this->state(function (array $attributes) {
             return [
                 'name' => 'سیاسی',
-                'url' => 'political'
+                'url' => 'political',
             ];
         });
     }
 
     /**
      * Specify the exact data for the 'تاریخی' category.
-     *
-     * @return \Database\Factories\MainCategoryFactory
      */
     public function historical(): MainCategoryFactory
     {
         return $this->state(function (array $attributes) {
             return [
                 'name' => 'تاریخی',
-                'url' => 'historical'
+                'url' => 'historical',
             ];
         });
     }

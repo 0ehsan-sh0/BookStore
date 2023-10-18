@@ -24,7 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
-        'role'
+        'role',
     ];
 
     /**
@@ -49,19 +49,23 @@ class User extends Authenticatable
 
     // ---------------------------------------------------------------- Relationships
 
-    public function addresses(){
+    public function addresses()
+    {
         return $this->hasMany(Address::class, 'user_id');
     }
 
-    public function carts(){
+    public function carts()
+    {
         return $this->hasMany(Cart::class, 'user_id');
     }
 
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(Comment::class, 'user_id');
     }
 
-    public function articles(){
+    public function articles()
+    {
         return $this->hasMany(Article::class, 'user_id');
     }
 

@@ -26,14 +26,13 @@ class StoreTagRequest extends FormRequest
     {
         return [
             'url' => 'required|unique:tags|regex:/^[a-zA-Z0-9-]+$/',
-            'name' => 'required'
+            'name' => 'required',
         ];
     }
 
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
@@ -53,7 +52,7 @@ class StoreTagRequest extends FormRequest
             'url.required' => 'مسیر تگ الزامی است',
             'url.regex' => 'لطفا مسیر معتبر وارد کنید',
             'url.unique' => 'مسیر تگ نمیتواند تکراری باشد',
-            'name.required' => 'نام تگ الزامی است'
+            'name.required' => 'نام تگ الزامی است',
         ];
     }
 }

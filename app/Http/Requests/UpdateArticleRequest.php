@@ -2,12 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Article;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
-
 
 class UpdateArticleRequest extends FormRequest
 {
@@ -26,22 +24,19 @@ class UpdateArticleRequest extends FormRequest
      */
     public function rules(): array
     {
-        $article = Article::find($this->route('article'));
-        if (!$article) return ['article' => 'required|exists:articles,id'];
         return [
             'title' => 'required',
             'subtitle' => 'required',
             'description' => 'required',
             'photo' => 'nullable|mimes:jpg,jpeg,png|max:3072',
             'tags' => 'required|array',
-            'tags.*' => 'exists:tags,id'
+            'tags.*' => 'exists:tags,id',
         ];
     }
 
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
@@ -66,7 +61,7 @@ class UpdateArticleRequest extends FormRequest
             'article.required' => 'مقاله مورد نظر یافت نشد',
             'article.exists' => 'مقاله مورد نظر یافت نشد',
             'tags.required' => 'حداقل یک تگ الزامی است',
-            'tags.*.exists' => 'تگ مورد نظر یافت نشد'
+            'tags.*.exists' => 'تگ مورد نظر یافت نشد',
         ];
     }
 }

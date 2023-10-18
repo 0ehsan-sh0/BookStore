@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Writer;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -25,18 +24,17 @@ class UpdateWriterRequest extends FormRequest
      */
     public function rules(): array
     {
-        $writer = Writer::find($this->route('writer'));
-        if (!$writer) return ['writer' => 'required|exists:writers,id'];
+        $writerID = $this->route('writer')->id;
+
         return [
-            'name' => 'required|unique:writers,name,' . $writer->id,
-            'photo' => 'mimes:jpg,jpeg,png|max:2048'
+            'name' => 'required|unique:writers,name,'.$writerID,
+            'photo' => 'mimes:jpg,jpeg,png|max:2048',
         ];
     }
 
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
@@ -58,7 +56,7 @@ class UpdateWriterRequest extends FormRequest
             'photo.mimes' => 'فرمت فایل باید از نوع png,jpeg,jpg باشد',
             'photo.max' => 'حجم فایل نباید بیشتر از دو مگابایت باشد',
             'writer.exists' => 'مسیر مورد نظر معتبر نیست',
-            'writer.required' => 'مسیر مورد نظر معتبر نیست'
+            'writer.required' => 'مسیر مورد نظر معتبر نیست',
         ];
     }
 }

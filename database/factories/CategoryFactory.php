@@ -23,8 +23,6 @@ class CategoryFactory extends Factory
 
     /**
      * Specify the exact data for the 'خودشناسی' category.
-     *
-     * @return \Database\Factories\CategoryFactory
      */
     public function selfKnowledge(): CategoryFactory
     {
@@ -32,15 +30,13 @@ class CategoryFactory extends Factory
             return [
                 'name' => 'خودشناسی',
                 'url' => 'self-knowledge',
-                'main_category_id' => 1
+                'main_category_id' => 1,
             ];
         });
     }
 
     /**
      * Specify the exact data for the 'ادبیات آمریکا' category.
-     *
-     * @return \Database\Factories\CategoryFactory
      */
     public function americanLiterature(): CategoryFactory
     {
@@ -48,15 +44,13 @@ class CategoryFactory extends Factory
             return [
                 'name' => 'ادبیات آمریکا',
                 'url' => 'american-literature',
-                'main_category_id' => 2
+                'main_category_id' => 2,
             ];
         });
     }
 
     /**
      * Specify the exact data for the 'فانتزی' category.
-     *
-     * @return \Database\Factories\CategoryFactory
      */
     public function fantasy(): CategoryFactory
     {
@@ -64,15 +58,13 @@ class CategoryFactory extends Factory
             return [
                 'name' => 'فانتزی',
                 'url' => 'fantasy',
-                'main_category_id' => 3
+                'main_category_id' => 3,
             ];
         });
     }
 
     /**
      * Specify the exact data for the 'سیاست ایران' category.
-     *
-     * @return \Database\Factories\CategoryFactory
      */
     public function iranPolitical(): CategoryFactory
     {
@@ -80,15 +72,13 @@ class CategoryFactory extends Factory
             return [
                 'name' => 'سیاست ایران',
                 'url' => 'iran-political',
-                'main_category_id' => 4
+                'main_category_id' => 4,
             ];
         });
     }
 
     /**
      * Specify the exact data for the 'اشکانیان' category.
-     *
-     * @return \Database\Factories\CategoryFactory
      */
     public function parthians(): CategoryFactory
     {
@@ -96,15 +86,13 @@ class CategoryFactory extends Factory
             return [
                 'name' => 'اشکانیان',
                 'url' => 'Parthians',
-                'main_category_id' => 5
+                'main_category_id' => 5,
             ];
         });
     }
 
     /**
      * Specify the exact data for the 'روانکاوی' category.
-     *
-     * @return \Database\Factories\CategoryFactory
      */
     public function psychoanalysis(): CategoryFactory
     {
@@ -112,15 +100,13 @@ class CategoryFactory extends Factory
             return [
                 'name' => 'روانکاوی',
                 'url' => 'psychoanalysis',
-                'main_category_id' => 1
+                'main_category_id' => 1,
             ];
         });
     }
 
     /**
      * Specify the exact data for the 'ادبیات فرانسه' category.
-     *
-     * @return \Database\Factories\CategoryFactory
      */
     public function frenchLiterature(): CategoryFactory
     {
@@ -128,15 +114,13 @@ class CategoryFactory extends Factory
             return [
                 'name' => 'ادبیات فرانسه',
                 'url' => 'french-literature',
-                'main_category_id' => 2
+                'main_category_id' => 2,
             ];
         });
     }
 
     /**
      * Specify the exact data for the 'ماجراجویی' category.
-     *
-     * @return \Database\Factories\CategoryFactory
      */
     public function adventure(): CategoryFactory
     {
@@ -144,15 +128,13 @@ class CategoryFactory extends Factory
             return [
                 'name' => 'ماجراجویی',
                 'url' => 'adventure',
-                'main_category_id' => 3
+                'main_category_id' => 3,
             ];
         });
     }
 
     /**
      * Specify the exact data for the 'سیاست روسیه' category.
-     *
-     * @return \Database\Factories\CategoryFactory
      */
     public function russianPolitical(): CategoryFactory
     {
@@ -160,15 +142,13 @@ class CategoryFactory extends Factory
             return [
                 'name' => 'سیاست روسیه',
                 'url' => 'russian-political',
-                'main_category_id' => 4
+                'main_category_id' => 4,
             ];
         });
     }
 
     /**
      * Specify the exactdata for the 'تاریخ یونان' category.
-     *
-     * @return \Database\Factories\CategoryFactory
      */
     public function historyOfGreece(): CategoryFactory
     {
@@ -176,7 +156,7 @@ class CategoryFactory extends Factory
             return [
                 'name' => 'تاریخ یونان',
                 'url' => 'history-of-greece',
-                'main_category_id' => 5
+                'main_category_id' => 5,
             ];
         });
     }

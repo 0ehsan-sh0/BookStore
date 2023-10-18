@@ -16,14 +16,16 @@ class DatabaseSeeder extends Seeder
         foreach ($cart->books as $book) {
             $totalPrice += $book->price * $book->pivot->count;
         }
+
         return $totalPrice;
     }
+
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-        
+
         \App\Models\User::factory(60)->create();
         \App\Models\Address::factory(100)->create();
         $carts = \App\Models\Cart::factory(300)->create();
@@ -52,7 +54,7 @@ class DatabaseSeeder extends Seeder
             'lastname' => 'main',
             'email' => 'admin@example.com',
             'role' => 'admin',
-            'password' => Hash::make('admin123')
+            'password' => Hash::make('admin123'),
         ]);
         $articles = \App\Models\Article::factory(40)->create();
         \App\Models\Comment::factory(300)->create();
@@ -61,23 +63,10 @@ class DatabaseSeeder extends Seeder
         foreach ($books as $book) {
             $hasTranslators = random_int(0, 1);
             if ($hasTranslators) {
-                $book->translators()->attach(
-                    $translators->random(rand(1, 3))->pluck('id')->toArray()
-                );
+                $book->translators()->attach($translators->random(rand(1, 3))->pluck('id')->toArray());
             }
-        }
-        //Attach random tags to each book
-        foreach ($books as $book) {
-            $book->tags()->attach(
-                $tags->random(rand(1, 5))->pluck('id')->toArray()
-            );
-        }
-        // Attach random categories to each book
-        foreach ($books as $book) {
-            $hasTranslators = random_int(0, 1);
-            $book->categories()->attach(
-                $categories->random(rand(1, 3))->pluck('id')->toArray()
-            );
+            $book->tags()->attach($tags->random(rand(1, 5))->pluck('id')->toArray());
+            $book->categories()->attach($categories->random(rand(1, 3))->pluck('id')->toArray());
         }
         // Attach random tags to the articles
         foreach ($articles as $article) {
@@ -89,7 +78,7 @@ class DatabaseSeeder extends Seeder
         foreach ($carts as $cart) {
             $random_books = $books->random(rand(1, 4))->pluck('id')->toArray();
             foreach ($random_books as $book) {
-                $cart->books()->attach($book, ['count' => random_int(1,3)]);
+                $cart->books()->attach($book, ['count' => random_int(1, 3)]);
             }
             $cart->total_price = $this->countTotalPrice($cart);
             $cart->save();

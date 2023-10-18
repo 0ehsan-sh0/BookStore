@@ -2,26 +2,27 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Book extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'code', 'name', 'english_name',
         'description', 'price', 'photo', 'print_series',
         'isbn', 'book_cover_type', 'format', 'pages',
-        'publish_year', 'count', 'writer_id', 'publisher'
+        'publish_year', 'count', 'writer_id', 'publisher',
     ];
 
     // ---------------------------------------------------------------- Relationships
 
     public function writer()
     {
-        return $this->belongsTo(Writer::class, 'writer_id');
+        return $this->belongsTo(Writer::class);
     }
 
     public function translators(): BelongsToMany

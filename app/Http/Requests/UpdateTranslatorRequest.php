@@ -2,11 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Translator;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
 
 class UpdateTranslatorRequest extends FormRequest
 {
@@ -25,18 +24,17 @@ class UpdateTranslatorRequest extends FormRequest
      */
     public function rules(): array
     {
-        $translator = Translator::find($this->route('translator'));
-        if (!$translator) return ['translator' => 'required|exists:translators,id'];
+        $translatorID = $this->route('translator')->id;
+
         return [
-            'name' => 'required|unique:translators,name,' . $translator->id,
-            'photo' => 'mimes:jpg,jpeg,png|max:2048'
+            'name' => 'required|unique:translators,name,'.$translatorID,
+            'photo' => 'mimes:jpg,jpeg,png|max:2048',
         ];
     }
 
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
@@ -58,7 +56,7 @@ class UpdateTranslatorRequest extends FormRequest
             'photo.mimes' => 'فرمت فایل باید از نوع png,jpeg,jpg باشد',
             'photo.max' => 'حجم فایل نباید بیشتر از دو مگابایت باشد',
             'translator.exists' => 'مسیر مورد نظر معتبر نیست',
-            'translator.required' => 'مسیر مورد نظر معتبر نیست'
+            'translator.required' => 'مسیر مورد نظر معتبر نیست',
         ];
     }
 }

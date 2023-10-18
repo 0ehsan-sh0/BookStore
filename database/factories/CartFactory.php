@@ -3,9 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Address;
-use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,17 +20,19 @@ class CartFactory extends Factory
      */
     public function definition(): array
     {
-        do $code = random_int(100000000, 999999999);
-        while (Cart::where('code', $code)->count() > 0);
+        do {
+            $code = random_int(100000000, 999999999);
+        } while (Cart::where('code', $code)->count() > 0);
         $startDate = Carbon::now()->subYear();
         $endDate = Carbon::now();
         $randomDateTime = Carbon::createFromTimestamp(rand($startDate->timestamp, $endDate->timestamp));
+
         return [
             'code' => $code,
             'ischeckedout_at' => $randomDateTime,
             'total_price' => 0,
             'address_id' => Address::all()->random()->id,
-            'user_id' => User::all()->random()->id
+            'user_id' => User::all()->random()->id,
         ];
     }
 }

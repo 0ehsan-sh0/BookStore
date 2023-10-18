@@ -7,7 +7,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 
-
 class StoreMainCategoryRequest extends FormRequest
 {
     /**
@@ -27,14 +26,13 @@ class StoreMainCategoryRequest extends FormRequest
     {
         return [
             'url' => 'required|unique:main_categories|regex:/^[a-zA-Z0-9-]+$/',
-            'name' => 'required'
+            'name' => 'required',
         ];
     }
 
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
@@ -54,7 +52,7 @@ class StoreMainCategoryRequest extends FormRequest
             'url.required' => 'مسیر دسته بندی اصلی الزامی است',
             'url.regex' => 'لطفا مسیر معتبر وارد کنید',
             'url.unique' => 'مسیر دسته بندی اصلی نمیتواند تکراری باشد',
-            'name.required' => 'نام دسته بندی اصلی الزامی است'
+            'name.required' => 'نام دسته بندی اصلی الزامی است',
         ];
     }
 }

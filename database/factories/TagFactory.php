@@ -19,7 +19,7 @@ class TagFactory extends Factory
     {
         return [
             'name' => Faker::word(),
-            'url' => fake()->unique()->word()
+            'url' => fake()->unique()->word(),
         ];
     }
 }

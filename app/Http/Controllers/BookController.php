@@ -9,13 +9,6 @@ use Illuminate\Support\Facades\Storage;
 
 class BookController extends ApiController
 {
-    // Find a specific object with id
-    public function find($id)
-    {
-        $object = Book::find($id);
-        if ($object) return $object;
-        else false;
-    }
     /**
      * Display a listing of the resource.
      */
@@ -35,8 +28,9 @@ class BookController extends ApiController
     public function store(StoreBookRequest $request)
     {
         $photo_path = $request->file('photo')->store('books', 'public');
-        do $code = random_int(100000000, 999999999);
-        while (Book::where('code', $code)->count() > 0);
+        do {
+            $code = random_int(100000000, 999999999);
+        } while (Book::where('code', $code)->count() > 0);
         $book = [
             'code' => $code,
             'name' => $request->name,
@@ -58,34 +52,35 @@ class BookController extends ApiController
         $book_created->categories()->attach($request->input('categories', []));
         $book_created->translators()->attach($request->input('translators', []));
         $book_created->tags()->attach($request->input('tags', []));
+
         return $this->successResponse('کتاب با موفقیت افزوده شد', '1');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($book)
+    public function show(Book $book)
     {
-        $book = Book::with([
-            'categories',
+        $book->load([
+            'categories' => function ($query) {
+                $query->with('main_category');
+            },
             'translators:id,name',
             'writer:id,name',
             'comments' => function ($query) {
                 $query->with('user:id,name,lastname,role')->where('status', true);
             },
-            'tags:name,url'
-        ])
-            ->find($book);
-        if (!$book) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
+            'tags:name,url',
+        ]);
+
         return $this->successResponse('عملیات با موفقیت انجام شد', $book);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBookRequest $request, $book)
+    public function update(UpdateBookRequest $request, Book $book)
     {
-        $book = $this->find($book);
         if ($request->hasFile('photo')) {
             if ($book->photo) {
                 Storage::disk('public')->delete($book->photo);
@@ -128,26 +123,24 @@ class BookController extends ApiController
         $book->categories()->sync($request->input('categories', []));
         $book->translators()->sync($request->input('translators', []));
         $book->tags()->sync($request->input('tags', []));
+
         return $this->successResponse('اطلاعات کتاب با موفقیت بروزرسانی شد', '1');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($book)
+    public function destroy(Book $book)
     {
-        $book = $this->find($book);
-        if (!$book) return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
         $book->delete();
+
         return $this->successResponse('کتاب با موفقیت حذف شد', '1');
     }
 
-    public function restoreData($book)
+    public function restoreData(Book $book)
     {
-        $book = Book::onlyTrashed()->find($book);
-        if ($book) {
-            $book->restore();
-            return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
-        } else return $this->errorResponse('مسیر مورد نظر معتبر نیست', '');
+        $book->restore();
+
+        return $this->successResponse('اطلاعات با موفقیت بازیابی شد', '1');
     }
 }

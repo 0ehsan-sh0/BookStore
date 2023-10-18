@@ -32,14 +32,13 @@ class StoreAddressRequest extends FormRequest
             'state' => 'required',
             'place_number' => 'required|unique:addresses|numeric',
             'post_code' => 'required|unique:addresses|numeric',
-            'address' => 'required'
+            'address' => 'required',
         ];
     }
 
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
@@ -69,7 +68,7 @@ class StoreAddressRequest extends FormRequest
             'post_code.required' => 'کد پستی الزامی است',
             'post_code.unique' => 'کد پستی تکراری است',
             'post_code.numeric' => 'کد پستی باید عددی باشد',
-            'address.required' => 'آدرس الزامی است'
+            'address.required' => 'آدرس الزامی است',
         ];
     }
 }

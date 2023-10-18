@@ -278,6 +278,11 @@
 											"key": "email",
 											"value": "",
 											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "",
+											"type": "text"
 										}
 									]
 								},
@@ -291,69 +296,7 @@
 									]
 								}
 							},
-							"response": [
-								{
-									"name": "Register",
-									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Accept",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "urlencoded",
-											"urlencoded": [
-												{
-													"key": "name",
-													"value": "احسان",
-													"type": "text"
-												},
-												{
-													"key": "lastname",
-													"value": "شریعتی",
-													"type": "text"
-												},
-												{
-													"key": "password",
-													"value": "12345678",
-													"type": "text"
-												},
-												{
-													"key": "password_confirmation",
-													"value": "12345678",
-													"type": "text"
-												},
-												{
-													"key": "email",
-													"value": "ehsan@gmail.com",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{LocalHostApi}}/register",
-											"host": [
-												"{{LocalHostApi}}"
-											],
-											"path": [
-												"register"
-											]
-										}
-									},
-									"_postman_previewlanguage": "Text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								}
-							]
+							"response": []
 						},
 						{
 							"name": "Login",
@@ -590,7 +533,7 @@
 											"type": "text"
 										},
 										{
-											"key": "user_id",
+											"key": "address_id",
 											"value": "",
 											"type": "text"
 										},

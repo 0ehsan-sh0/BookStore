@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Ybazli\Faker\Facades\Faker;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Ybazli\Faker\Facades\Faker;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Translator>
@@ -20,7 +20,7 @@ class TranslatorFactory extends Factory
         return [
             'name' => Faker::fullName(),
             'description' => Faker::paragraph(),
-            'photo' => fake()->imageUrl($width=300, $height=300)
+            'photo' => fake()->imageUrl($width = 300, $height = 300),
         ];
     }
 }

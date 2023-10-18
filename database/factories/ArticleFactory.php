@@ -19,12 +19,13 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         $adminUserIds = User::where('role', 'admin')->pluck('id')->toArray();
+
         return [
             'title' => Faker::word(),
             'subtitle' => Faker::sentence(),
             'description' => Faker::paragraph(),
             'photo' => fake()->imageUrl($width = 1000, $height = 650),
-            'user_id' => $adminUserIds[0]
+            'user_id' => $adminUserIds[0],
         ];
     }
 }

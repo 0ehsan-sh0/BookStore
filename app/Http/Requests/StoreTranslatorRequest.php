@@ -26,14 +26,13 @@ class StoreTranslatorRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:translators',
-            'photo' => 'mimes:jpg,jpeg,png|max:2048'
+            'photo' => 'mimes:jpg,jpeg,png|max:2048',
         ];
     }
 
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
@@ -53,7 +52,7 @@ class StoreTranslatorRequest extends FormRequest
             'name.required' => 'نام مترجم الزامی است',
             'name.unique' => 'نام مترجم نمیتواند تکراری باشد',
             'photo.mimes' => 'فرمت فایل باید از نوع png,jpeg,jpg باشد',
-            'photo.max' => 'حجم فایل نباید بیشتر از دو مگابایت باشد'
+            'photo.max' => 'حجم فایل نباید بیشتر از دو مگابایت باشد',
         ];
     }
 }
